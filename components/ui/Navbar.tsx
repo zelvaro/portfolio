@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { PERSONAL_INFO } from "@/lib/data";
+import { Monogram } from "./Monogram";
 
 const NAV_LINKS = [
   { href: "/work", label: "Work" },
@@ -47,8 +48,9 @@ export function Navbar() {
       }`}
     >
       <nav className="container-page flex h-16 items-center justify-between" aria-label="Main">
-        <Link href="/" className="text-base font-semibold tracking-tight">
-          {PERSONAL_INFO.name}
+        <Link href="/" className="flex items-center gap-2.5 font-display text-base font-semibold tracking-tight">
+          <Monogram className="h-9 w-9 text-xs shadow-lg shadow-accent-deep/50" />
+          <span className="hidden sm:inline">{PERSONAL_INFO.name}</span>
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex">

@@ -20,12 +20,20 @@ const config: Config = {
         accent: {
           DEFAULT: token("accent"),
           soft: token("accent-soft"),
+          deep: token("accent-deep"),
         },
         "on-accent": token("on-accent"),
         signal: token("signal"),
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        sans: ["var(--font-body)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-body)", "sans-serif"],
+      },
+      keyframes: {
+        blink: { "0%, 49%": { opacity: "1" }, "50%, 100%": { opacity: "0" } },
+      },
+      animation: {
+        blink: "blink 1s step-end infinite",
       },
     },
   },

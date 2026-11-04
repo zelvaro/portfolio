@@ -2,36 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Light theme: cool paper with a Majorelle blue accent */
+/* Deep violet night theme */
 :root {
-  --bg: 244 246 248;
-  --surface: 255 255 255;
-  --ink: 16 24 40;
-  --muted: 71 84 103;
-  --subtle: 102 112 133;
-  --line: 222 227 234;
-  --accent: 79 63 214;
-  --accent-soft: 237 235 252;
+  --bg: 17 7 31;
+  --surface: 29 13 52;
+  --ink: 255 255 255;
+  --muted: 196 186 222;
+  --subtle: 150 136 184;
+  --line: 62 36 106;
+  --accent: 171 116 255;
+  --accent-soft: 46 21 86;
+  --accent-deep: 113 39 186;
   --on-accent: 255 255 255;
-  --signal: 214 150 32;
-  color-scheme: light;
-}
-
-/* Dark theme follows the visitor's system setting */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: 12 15 29;
-    --surface: 20 25 44;
-    --ink: 236 239 247;
-    --muted: 166 173 196;
-    --subtle: 128 137 166;
-    --line: 39 46 72;
-    --accent: 152 142 247;
-    --accent-soft: 35 33 74;
-    --on-accent: 12 15 29;
-    --signal: 236 180 72;
-    color-scheme: dark;
-  }
+  --signal: 74 222 128;
+  color-scheme: dark;
 }
 
 html {
@@ -42,13 +26,19 @@ html {
 body {
   background: rgb(var(--bg));
   color: rgb(var(--ink));
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+}
+
 ::selection {
-  background: rgb(var(--accent) / 0.2);
+  background: rgb(var(--accent) / 0.35);
 }
 
 :focus-visible {
@@ -75,15 +65,29 @@ body {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
   }
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-colors duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200;
   }
   .btn-primary {
-    @apply btn bg-accent text-on-accent hover:bg-accent/90;
+    @apply btn bg-gradient-to-r from-[#6D28D9] to-[#9B4DFF] text-white shadow-lg shadow-[#7127BA]/40 hover:brightness-110;
   }
   .btn-secondary {
-    @apply btn border border-line bg-surface text-ink hover:border-accent/60;
+    @apply btn border border-line bg-surface/60 text-ink backdrop-blur hover:border-accent/70;
   }
   .link {
     @apply font-semibold text-accent underline-offset-4 hover:underline;
+  }
+  /* Violet gradient card from the design */
+  .card-glow {
+    @apply relative overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-[#1C0B36] via-[#24104A] to-[#3A1670];
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-[#B57BFF] via-[#9B4DFF] to-[#E2A0FF] bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  /* Soft violet halo behind sections */
+  .halo {
+    background: radial-gradient(closest-side, rgb(124 58 237 / 0.35), transparent);
   }
 }
