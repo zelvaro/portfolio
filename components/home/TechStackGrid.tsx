@@ -6,10 +6,10 @@ import { TECH_STACK } from "@/lib/data";
 import { SpotlightCard } from "../ui/SpotlightCard";
 import { SectionHeader } from "../ui/SectionHeader";
 
-const CATEGORIES = ["AI & Agents", "Frontend", "Backend & Infra"] as const;
+const CATEGORIES = ["Frontend & Mobile", "Backend & Data", "AI/ML & DevOps"] as const;
 
 export function TechStackGrid() {
-  const [activeCategory, setActiveCategory] = useState<string>("AI & Agents");
+  const [activeCategory, setActiveCategory] = useState<string>("Frontend & Mobile");
 
   const filteredItems = TECH_STACK.filter((item) => item.category === activeCategory);
 
@@ -17,8 +17,8 @@ export function TechStackGrid() {
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-border-hairline/60">
       <SectionHeader
         eyebrow="// TECHNICAL STACK"
-        title="Tools & Architecture"
-        description="I choose tools based on execution speed, operational reliability, and type safety — never hype."
+        title="Skills & Tools"
+        description="The languages, frameworks, and tools I have worked with across internships and projects."
       />
 
       {/* Category Tabs */}
@@ -52,22 +52,16 @@ export function TechStackGrid() {
           >
             <SpotlightCard className="p-6 bg-bg-surface border-border-hairline h-full flex flex-col justify-between group">
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-display font-semibold text-lg text-text-primary group-hover:text-accent-secondary transition-colors">
-                    {tech.name}
-                  </h4>
-                  <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-bg-surface-2 border border-border-hairline text-accent-secondary">
-                    {tech.level}
-                  </span>
-                </div>
+                <h4 className="font-display font-semibold text-lg text-text-primary group-hover:text-accent-secondary transition-colors mb-3">
+                  {tech.name}
+                </h4>
                 <p className="text-text-secondary text-xs sm:text-sm leading-relaxed">
                   {tech.description}
                 </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-border-hairline/50 flex items-center justify-between text-[11px] font-mono text-text-muted">
+              <div className="mt-4 pt-3 border-t border-border-hairline/50 text-[11px] font-mono text-text-muted">
                 <span>{tech.category}</span>
-                <span className="text-accent-primary/80">PROD READY</span>
               </div>
             </SpotlightCard>
           </motion.div>

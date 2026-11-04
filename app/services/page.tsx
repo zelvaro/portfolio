@@ -1,13 +1,14 @@
 import Link from "next/link";
-import { ArrowRight, Bot, BrainCircuit, Check, Layers, Workflow, Zap } from "lucide-react";
+import { ArrowRight, Bot, BrainCircuit, Check, Layers, Server, Smartphone, Zap } from "lucide-react";
 import { SERVICES } from "@/lib/data";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 const ICON_MAP: Record<string, any> = {
   Bot,
-  Workflow,
   Layers,
+  Server,
+  Smartphone,
   Zap,
   BrainCircuit,
 };
@@ -17,8 +18,8 @@ export default function ServicesPage() {
     <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen">
       <SectionHeader
         eyebrow="// ENGINEERING OFFERINGS"
-        title="AI Agents, Automation & Software Engineering"
-        description="I design, build, and deploy production software solutions tailored for measurable efficiency."
+        title="Web, Mobile & AI Development"
+        description="What I can build for you, based on the stacks I have used in internships and academic projects."
       />
 
       <div className="space-y-12">

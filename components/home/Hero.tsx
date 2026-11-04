@@ -12,10 +12,10 @@ export function Hero() {
 
   const logs = [
     { text: "> system init: Sabir Essaad AI Engine v2.4", color: "text-text-muted" },
-    { text: "> loading agent pipeline: [CV Parsing -> Vector Match -> n8n Dispatch]", color: "text-accent-secondary" },
-    { text: "> executing postule.ma match engine...", color: "text-text-secondary" },
-    { text: "> output: 94.8% candidate-to-offer precision", color: "text-accent-success" },
-    { text: "> status: 12,000+ autonomous applications shipped", color: "text-accent-primary font-bold" },
+    { text: "> loading agent pipeline: [Plan -> Tool Call -> Validate]", color: "text-accent-secondary" },
+    { text: "> executing multi-agent task graph...", color: "text-text-secondary" },
+    { text: "> output: schema validated, guardrails passed", color: "text-accent-success" },
+    { text: "> status: agent run complete", color: "text-accent-primary font-bold" },
   ];
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-lg sm:text-xl text-text-secondary max-w-2xl leading-relaxed mb-8 font-normal"
           >
-            AI Engineer &amp; Full Stack Developer. I design and ship agentic systems, automation pipelines, and production software — end to end. Not just demos.
+            Computer Science &amp; Networks engineering student at EMSI and full stack developer. I build web, mobile, and AI-powered applications — from database to deployment.
           </motion.p>
 
           <motion.div
@@ -72,40 +72,20 @@ export function Hero() {
             className="flex flex-wrap items-center gap-4 w-full sm:w-auto"
           >
             <Link
-              href="/work/postule-ma"
+              href="/work"
               className="w-full sm:w-auto group inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-accent-gradient text-white font-medium text-sm shadow-xl shadow-accent-primary/20 hover:shadow-accent-primary/35 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
             >
-              <span>See Postule.ma</span>
+              <span>View my work</span>
               <ArrowUpRight className="w-4 h-4 text-accent-secondary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
 
             <Link
-              href="/work"
+              href="/contact"
               className="w-full sm:w-auto group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-bg-surface border border-border-hairline text-text-primary font-medium text-sm hover:border-accent-primary/40 hover:bg-bg-surface-2 transition-all duration-200"
             >
-              <span>View my work</span>
+              <span>Let&apos;s talk</span>
               <ArrowRight className="w-4 h-4 text-text-muted group-hover:translate-x-1 transition-transform" />
             </Link>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-10 pt-6 border-t border-border-hairline/60 grid grid-cols-3 gap-6 sm:gap-10 text-left"
-          >
-            <div>
-              <div className="font-mono text-xl sm:text-2xl font-bold text-text-primary">12k+</div>
-              <div className="text-xs text-text-muted mt-0.5">Applications Sent</div>
-            </div>
-            <div>
-              <div className="font-mono text-xl sm:text-2xl font-bold text-text-primary">94.8%</div>
-              <div className="text-xs text-text-muted mt-0.5">AI Match Accuracy</div>
-            </div>
-            <div>
-              <div className="font-mono text-xl sm:text-2xl font-bold text-text-primary">14h/wk</div>
-              <div className="text-xs text-text-muted mt-0.5">Saved per User</div>
-            </div>
           </motion.div>
         </div>
 
@@ -150,7 +130,7 @@ export function Hero() {
               <div className="pt-3 border-t border-border-hairline/40 flex items-center justify-between text-text-muted text-[11px]">
                 <div className="flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-accent-secondary animate-pulse" />
-                  <span>n8n workflow node: #829-agent-exec</span>
+                  <span>agent run: #829-agent-exec</span>
                 </div>
                 <span className="text-text-muted">Node v22.20</span>
               </div>

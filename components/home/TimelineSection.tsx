@@ -12,7 +12,7 @@ export function TimelineSection() {
       <SectionHeader
         eyebrow="// TRACK RECORD"
         title="Experience & Education"
-        description="A continuous progression from computer engineering fundamentals to advanced AI systems architecture."
+        description="From engineering school to internships and generative AI training."
       />
 
       <div className="relative pl-6 sm:pl-8 border-l border-border-hairline/80 space-y-10 ml-2 sm:ml-4">
@@ -45,11 +45,15 @@ export function TimelineSection() {
                     </h3>
                     <div className="flex items-center gap-2 text-sm text-accent-primary font-medium mt-0.5">
                       <span>{item.institution}</span>
-                      <span className="text-text-muted">•</span>
-                      <span className="flex items-center gap-1 text-xs text-text-muted font-mono">
-                        <MapPin className="w-3 h-3" />
-                        {item.location}
-                      </span>
+                      {item.location && (
+                        <>
+                          <span className="text-text-muted">•</span>
+                          <span className="flex items-center gap-1 text-xs text-text-muted font-mono">
+                            <MapPin className="w-3 h-3" />
+                            {item.location}
+                          </span>
+                        </>
+                      )}
                     </div>
                   </div>
 

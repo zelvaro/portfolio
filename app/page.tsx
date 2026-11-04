@@ -1,6 +1,5 @@
 import { Hero } from "@/components/home/Hero";
-import { FlagshipShowcase } from "@/components/home/FlagshipShowcase";
-import { ComingSoonGrid } from "@/components/home/ComingSoonGrid";
+import { ProjectsGrid } from "@/components/home/ProjectsGrid";
 import { ServicesGrid } from "@/components/home/ServicesGrid";
 import { TechStackGrid } from "@/components/home/TechStackGrid";
 import { TimelineSection } from "@/components/home/TimelineSection";
@@ -11,8 +10,7 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <FlagshipShowcase />
-      <ComingSoonGrid />
+      <ProjectsGrid />
       <ServicesGrid />
       <TechStackGrid />
       <TimelineSection />

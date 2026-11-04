@@ -8,11 +8,11 @@ import { PERSONAL_INFO } from "@/lib/data";
 import { SpotlightCard } from "../ui/SpotlightCard";
 
 const PROJECT_TYPES = [
-  "AI Agent System",
-  "n8n Workflow Automation",
-  "Full Stack App",
-  "API Integration",
-  "Technical Consulting",
+  "Full Stack Web App",
+  "Mobile App",
+  "AI / ML Integration",
+  "DevOps & Deployment",
+  "Internship / Job Opportunity",
 ];
 
 function ContactFormInner() {
@@ -28,11 +28,10 @@ function ContactFormInner() {
 
   useEffect(() => {
     if (serviceParam) {
-      if (serviceParam === "ai-agents") setSelectedType("AI Agent System");
-      if (serviceParam === "automation") setSelectedType("n8n Workflow Automation");
-      if (serviceParam === "full-stack") setSelectedType("Full Stack App");
-      if (serviceParam === "api-integration") setSelectedType("API Integration");
-      if (serviceParam === "consulting") setSelectedType("Technical Consulting");
+      if (serviceParam === "full-stack") setSelectedType("Full Stack Web App");
+      if (serviceParam === "mobile") setSelectedType("Mobile App");
+      if (serviceParam === "ai-ml") setSelectedType("AI / ML Integration");
+      if (serviceParam === "devops") setSelectedType("DevOps & Deployment");
     }
   }, [serviceParam]);
 
@@ -61,7 +60,7 @@ function ContactFormInner() {
         Message Dispatched!
       </h3>
       <p className="text-text-secondary text-sm max-w-md mx-auto mb-6">
-        Thank you for reaching out, {name}. I usually reply within 12 hours with a direct technical assessment.
+        Thank you for reaching out, {name}. I will get back to you as soon as possible.
       </p>
       <button
         onClick={() => {
@@ -193,11 +192,11 @@ export function ContactSection() {
             </div>
 
             <h2 className="font-display text-3xl sm:text-5xl font-semibold tracking-tight text-text-primary mb-6 leading-tight">
-              Have a product in mind?
+              Have a project or an opportunity?
             </h2>
 
             <p className="text-text-secondary text-base sm:text-lg leading-relaxed mb-8">
-              Tell me what you&apos;re building — I&apos;ll tell you honestly if AI is the right tool for it.
+              Tell me what you&apos;re building or hiring for — I&apos;ll get back to you quickly.
             </p>
 
             <div className="space-y-4 mb-8">

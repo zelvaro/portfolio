@@ -6,25 +6,24 @@ import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 
 export const metadata: Metadata = {
-  title: "Sabir Essaad — AI Engineer & Full Stack Developer",
+  title: "Sabir Essaad — Full Stack & AI Developer",
   description:
-    "I don't build websites. I build intelligent software. AI Engineer & Full Stack Developer specializing in agentic systems, n8n automation, and Next.js applications.",
+    "Computer Science & Networks engineering student at EMSI and full stack developer. Web, mobile, and AI-powered applications.",
   keywords: [
     "Sabir Essaad",
-    "AI Engineer",
+    "AI Developer",
     "Full Stack Developer",
-    "Agentic Systems",
-    "n8n Workflows",
-    "Postule.ma",
-    "Next.js Developer",
-    "Morocco AI Engineer",
+    "Generative AI",
+    "EMSI",
+    "React",
+    "Spring Boot",
+    "Marrakech",
   ],
   authors: [{ name: "Sabir Essaad" }],
   openGraph: {
-    title: "Sabir Essaad — AI Engineer & Full Stack Developer",
-    description: "Building AI products that replace manual work.",
+    title: "Sabir Essaad — Full Stack & AI Developer",
+    description: "Web, mobile, and AI-powered applications.",
     type: "website",
-    url: "https://essaad.ai",
   },
 };
 

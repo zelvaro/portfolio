@@ -10,7 +10,7 @@ export default function BlogIndexPage() {
       <SectionHeader
         eyebrow="// TECHNICAL WRITING"
         title="Articles, Architecture & Lessons"
-        description="Engineering insights on building production-ready AI agents, resume parsing algorithms, and system reliability."
+        description="Engineering insights on building production-ready AI agents and system reliability."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

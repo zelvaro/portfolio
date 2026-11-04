@@ -1,15 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Bot, Workflow, Layers, Zap, BrainCircuit } from "lucide-react";
+import { ArrowRight, Bot, Layers, Server, Smartphone, Zap, BrainCircuit } from "lucide-react";
 import { SERVICES } from "@/lib/data";
 import { SpotlightCard } from "../ui/SpotlightCard";
 import { SectionHeader } from "../ui/SectionHeader";
 
 const ICON_MAP: Record<string, any> = {
   Bot,
-  Workflow,
   Layers,
+  Server,
+  Smartphone,
   Zap,
   BrainCircuit,
 };
@@ -22,8 +23,8 @@ export function ServicesGrid() {
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-border-hairline/60">
       <SectionHeader
         eyebrow="// WHAT I BUILD"
-        title="Engineering Services & Solutions"
-        description="I don't sell bloated agency retainer contracts. I architect and deliver high-ROI intelligent software."
+        title="What I Can Build"
+        description="Web, mobile, and AI-powered software — built end to end."
       />
 
       {/* 4-card Grid */}

@@ -13,7 +13,7 @@ export function BlogPreview() {
         <SectionHeader
           eyebrow="// WRITING & ARTICLES"
           title="Engineering Insights"
-          description="Technical deep dives on production AI, resume parsing, and agent architectures."
+          description="Technical deep dives on production AI and agent architectures."
           className="mb-0"
         />
 

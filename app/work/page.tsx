@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { ArrowUpRight, Github, Lock, Sparkles, Filter } from "lucide-react";
+import { Briefcase, Filter, GraduationCap } from "lucide-react";
 import { PROJECTS } from "@/lib/data";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
-const CATEGORIES = ["All", "AI Agent", "Full Stack", "Automation", "LLM App"];
+const CATEGORIES = ["All", "Internship", "Academic"];
 
 export default function WorkPage() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -19,9 +18,9 @@ export default function WorkPage() {
   return (
     <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen">
       <SectionHeader
-        eyebrow="// SELECTED PORTFOLIO"
-        title="Products & Agentic Systems"
-        description="A showcase of shipped production software and active R&D pipelines. Every project answers real business friction."
+        eyebrow="// SELECTED WORK"
+        title="Internship & Academic Projects"
+        description="Web, mobile, and AI applications built during internships and at EMSI."
       />
 
       {/* Filter Tabs */}
@@ -51,7 +50,7 @@ export default function WorkPage() {
       {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {filteredProjects.map((project) => {
-          const isShipped = project.status === "shipped";
+          const isInternship = project.category === "Internship";
           return (
             <SpotlightCard
               key={project.id}
@@ -63,24 +62,13 @@ export default function WorkPage() {
                     {project.category}
                   </span>
 
-                  <span
-                    className={`inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-mono border ${
-                      isShipped
-                        ? "bg-accent-success/10 border-accent-success/30 text-accent-success"
-                        : "bg-bg-base border-border-hairline text-text-muted"
-                    }`}
-                  >
-                    {isShipped ? (
-                      <>
-                        <Sparkles className="w-3 h-3" />
-                        <span>SHIPPED</span>
-                      </>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-[11px] font-mono border bg-bg-base border-border-hairline text-text-muted">
+                    {isInternship ? (
+                      <Briefcase className="w-3 h-3 text-accent-secondary" />
                     ) : (
-                      <>
-                        <Lock className="w-3 h-3" />
-                        <span>COMING SOON</span>
-                      </>
+                      <GraduationCap className="w-3 h-3 text-accent-primary" />
                     )}
+                    <span>{project.context}</span>
                   </span>
                 </div>
 
@@ -94,7 +82,7 @@ export default function WorkPage() {
                 </p>
 
                 {/* Tech Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-8">
+                <div className="flex flex-wrap gap-1.5">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
@@ -106,34 +94,11 @@ export default function WorkPage() {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="pt-6 border-t border-border-hairline/60 flex items-center justify-between">
-                {isShipped ? (
-                  <Link
-                    href={project.caseStudyUrl || `/work/${project.slug}`}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-text-primary group-hover:text-accent-secondary transition-colors"
-                  >
-                    <span>Read Case Study</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </Link>
-                ) : (
-                  <span className="text-xs font-mono text-text-muted">
-                    Specifications Locked
-                  </span>
-                )}
-
-                {project.githubUrl && (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-bg-surface-2 border border-border-hairline text-text-muted hover:text-text-primary transition-colors"
-                    aria-label="GitHub"
-                  >
-                    <Github className="w-4 h-4" />
-                  </a>
-                )}
-              </div>
+              {project.period && (
+                <div className="mt-8 pt-6 border-t border-border-hairline/60 text-xs font-mono text-text-muted">
+                  {project.period}
+                </div>
+              )}
             </SpotlightCard>
           );
         })}

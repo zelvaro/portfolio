@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Cpu, FileText, Sparkles } from "lucide-react";
-import { PERSONAL_INFO, PRINCIPLES, TIMELINE } from "@/lib/data";
+import { CERTIFICATIONS, LANGUAGES, PERSONAL_INFO, PRINCIPLES, TIMELINE } from "@/lib/data";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
@@ -10,8 +10,8 @@ export default function AboutPage() {
       {/* Page Header */}
       <SectionHeader
         eyebrow="// ENGINEERING PROFILE"
-        title="I studied computer science and AI to build the thing, not describe it."
-        description="Software engineer specializing in autonomous agent architectures, multi-step LLM orchestration, and high-performance full-stack web applications."
+        title="I study computer science to build the thing, not describe it."
+        description="Computer Science & Networks engineering student and full stack developer, working across web, mobile, and AI."
       />
 
       {/* Story & Mindset Grid */}
@@ -24,18 +24,18 @@ export default function AboutPage() {
             </span>
 
             <h3 className="font-display text-2xl font-semibold text-text-primary mb-6">
-              From State Engineering Honors to Production AI Agents
+              From Engineering School to Real-World Projects
             </h3>
 
             <div className="space-y-4 text-text-secondary text-base leading-relaxed font-normal">
               <p>
-                My journey began with a State Engineering degree in Computer Science at EMSI, followed by a Master&apos;s in Artificial Intelligence at Université Côte d&apos;Azur in France. Rather than staying in academic theory, I spent my energy building real software systems that reduce friction.
+                I am a Computer Science &amp; Networks engineering student at EMSI, based in Marrakech. After the preparatory cycle (2021 — 2023), I joined the engineering cycle, covering advanced programming, web development, databases, network administration, DevOps, cloud computing, and artificial intelligence.
               </p>
               <p>
-                At GenAIOT, I engineered generative AI pipelines and vector search engines for enterprise clients. Later, I founded <strong className="text-text-primary">Postule.ma</strong> — an AI job application platform that automates resume matching and job dispatches across candidate databases.
+                Through internships at <strong className="text-text-primary">XAI</strong>, <strong className="text-text-primary">Norsys</strong>, and <strong className="text-text-primary">RIDA ANIS</strong>, I built a smart real estate platform with interactive 3D models, an AI-assisted HR solution, and a stock management system. I also completed the <strong className="text-text-primary">GenAIOT</strong> training program: 4 months of theory — 2 months of common core and 2 months of agentic AI — followed by a 4-month in-company project internship at <strong className="text-text-primary">Fusion AI</strong>.
               </p>
               <p>
-                Today, I partner with forward-thinking teams to design agentic systems, n8n workflow automations, and Next.js applications that eliminate manual work.
+                I am open to opportunities in full stack development, mobile, AI/ML, and data engineering.
               </p>
             </div>
           </div>
@@ -94,7 +94,7 @@ export default function AboutPage() {
           title="Timeline & Progression"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {TIMELINE.map((item) => (
             <SpotlightCard key={item.id} className="p-6 bg-bg-surface border-border-hairline flex flex-col justify-between">
               <div>
@@ -112,12 +112,45 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-border-hairline/60 text-[11px] font-mono text-text-muted">
-                📍 {item.location}
-              </div>
+              {item.location && (
+                <div className="pt-3 border-t border-border-hairline/60 text-[11px] font-mono text-text-muted">
+                  📍 {item.location}
+                </div>
+              )}
             </SpotlightCard>
           ))}
         </div>
+      </div>
+
+      {/* Certifications & Languages */}
+      <div className="border-t border-border-hairline pt-16 mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <SpotlightCard className="p-8 bg-bg-surface border-border-hairline">
+          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-accent-secondary mb-4 block">
+            // CERTIFICATIONS
+          </span>
+          <ul className="space-y-3">
+            {CERTIFICATIONS.map((certification) => (
+              <li key={certification} className="flex items-start gap-2 text-sm text-text-secondary">
+                <CheckCircle2 className="w-4 h-4 text-accent-success shrink-0 mt-0.5" />
+                <span>{certification}</span>
+              </li>
+            ))}
+          </ul>
+        </SpotlightCard>
+
+        <SpotlightCard className="p-8 bg-bg-surface border-border-hairline">
+          <span className="font-mono text-xs font-semibold uppercase tracking-wider text-accent-secondary mb-4 block">
+            // LANGUAGES
+          </span>
+          <ul className="space-y-3">
+            {LANGUAGES.map((language) => (
+              <li key={language.name} className="flex items-center justify-between text-sm">
+                <span className="text-text-primary font-medium">{language.name}</span>
+                <span className="font-mono text-xs text-text-muted">{language.level}</span>
+              </li>
+            ))}
+          </ul>
+        </SpotlightCard>
       </div>
     </div>
   );

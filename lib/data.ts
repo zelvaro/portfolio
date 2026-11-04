@@ -1,26 +1,12 @@
 export interface Project {
   id: string;
-  slug: string;
   title: string;
   subtitle: string;
   description: string;
-  fullDescription?: string;
-  status: "shipped" | "coming_soon";
-  isFlagship?: boolean;
-  category: "AI Agent" | "Full Stack" | "Automation" | "LLM App";
+  category: "Internship" | "Academic";
+  context: string;
+  period?: string;
   tags: string[];
-  metrics?: { label: string; value: string }[];
-  image?: string;
-  liveUrl?: string;
-  githubUrl?: string;
-  caseStudyUrl?: string;
-  architecture?: {
-    problem: string;
-    approach: string;
-    systemDesign: string[];
-    challenges: string;
-    impact: string;
-  };
 }
 
 export interface Service {
@@ -36,10 +22,8 @@ export interface Service {
 
 export interface TechItem {
   name: string;
-  category: "AI & Agents" | "Frontend" | "Backend & Infra";
-  level: string;
+  category: "Frontend & Mobile" | "Backend & Data" | "AI/ML & DevOps";
   description: string;
-  icon?: string;
 }
 
 export interface TimelineItem {
@@ -48,7 +32,7 @@ export interface TimelineItem {
   role: string;
   institution: string;
   type: "education" | "experience";
-  location: string;
+  location?: string;
   description: string;
   highlights: string[];
 }
@@ -65,15 +49,16 @@ export interface BlogPost {
 
 export const PERSONAL_INFO = {
   name: "Sabir Essaad",
-  title: "AI Engineer & Full Stack Developer",
-  status: "Available for select projects",
-  tagline: "I don't build websites. I build intelligent software.",
+  title: "Full Stack & AI Developer",
+  status: "Open to opportunities",
+  location: "Marrakech, Morocco",
+  tagline: "Computer Science & Networks engineering student. Full stack developer.",
   heroHeadline: "Building AI products that replace manual work.",
   heroSubtext:
-    "AI Engineer & Full Stack Developer. I design and ship agentic systems, automation pipelines, and production software — end to end. Not just demos.",
-  email: "sabir.essaad@gmail.com",
-  github: "https://github.com/sabiresaad",
-  linkedin: "https://linkedin.com/in/sabir-essaad",
+    "Computer Science & Networks engineering student at EMSI and full stack developer. I build web, mobile, and AI-powered applications — from database to deployment.",
+  email: "sabiressaad24@gmail.com",
+  github: "https://github.com/sabiressaad",
+  linkedin: "https://linkedin.com/in/sabiressaad/",
   cvUrl: "/cv.pdf",
 };
 
@@ -82,358 +67,310 @@ export const PRINCIPLES = [
     number: "01",
     title: "Ship, then refine",
     description:
-      "A working v1 in production beats a theoretical architecture in Figma. Speed of iteration is the ultimate engine of product quality.",
+      "A working v1 beats a theoretical architecture in Figma. Speed of iteration is the ultimate engine of product quality.",
   },
   {
     number: "02",
-    title: "Architect for autonomy",
+    title: "Learn fast, adapt faster",
     description:
-      "Intelligent software should reduce decision fatigue, not increase it. Build deterministic fallbacks around stochastic LLMs.",
+      "Angular or React, Spring Boot or Django, web or mobile — I pick up the stack the project needs and get productive quickly.",
   },
   {
     number: "03",
     title: "Measure by outcome",
     description:
-      "Code volume is liability. I judge software by hours saved, manual tasks eliminated, and latency cut — never lines written.",
+      "I judge software by the problem it solves for its users — never by the number of lines written.",
   },
 ];
 
 export const PROJECTS: Project[] = [
   {
-    id: "postule-ma",
-    slug: "postule-ma",
-    title: "Postule.ma",
-    subtitle: "AI-Powered Autonomous Job Application Platform",
+    id: "smart-real-estate",
+    title: "Smart Real Estate Platform",
+    subtitle: "Internship project — AI & Full Stack Developer",
     description:
-      "An end-to-end AI platform that ingests CVs, intelligently matches candidates against live job offers across regional boards, auto-tailors applications, and executes applications via n8n automation pipelines.",
-    fullDescription:
-      "Postule.ma addresses the repetitive friction of modern job applications. Candidates upload their raw CV once; our proprietary matching engine extracts granular structured skills using custom LLM parsers, ranks real-time job listings, generates hyper-tailored motivation letters, and pushes applications directly to hiring portals through autonomous n8n workflows.",
-    status: "shipped",
-    isFlagship: true,
-    category: "AI Agent",
-    tags: ["Next.js 14", "n8n Workflows", "AI Matching Engine", "CV Parsing", "Python", "Vector DB"],
-    metrics: [
-      { label: "Match Precision", value: "94.8%" },
-      { label: "Time Saved / User", value: "14 hrs/wk" },
-      { label: "Applications Processed", value: "12,000+" },
-      { label: "Avg Latency", value: "< 1.2s" },
-    ],
-    liveUrl: "https://postule.ma",
-    githubUrl: "https://github.com/sabiresaad/postule-ma",
-    caseStudyUrl: "/work/postule-ma",
-    architecture: {
-      problem:
-        "Job applicants spend 15–20 hours per week tailoring resumes and manually filling application forms with repetitive data, leading to low response rates and burnout.",
-      approach:
-        "Built a dual-layer architecture: a crisp, high-speed Next.js user interface paired with a robust Python/n8n backend orchestration engine. Uses semantic embeddings to match applicant profiles against parsed job specifications.",
-      systemDesign: [
-        "PDF/DOCX Resume Extraction: Custom PyMuPDF + OpenAI JSON schema structured output parser.",
-        "Semantic Vector Search: Qdrant vector database indexing candidate achievements against job requirements.",
-        "n8n Workflow Execution: Autonomous web scraping, form filling, and email payload dispatch.",
-        "Resilient Fallbacks: Human-in-the-loop validation queue for low-confidence match scores.",
-      ],
-      challenges:
-        "Handling unstructured PDF resume formats with non-standard column layouts, and preventing LLM hallucination during candidate experience summarization. Solved via strict Zod schema validation and deterministic prompt guardrails.",
-      impact:
-        "Streamlined candidate application throughput by 800%, reducing average application time from 18 minutes to 45 seconds while maintaining high interview conversion rates.",
-    },
+      "Web application to visualize and manage real estate properties, integrating interactive 3D models.",
+    category: "Internship",
+    context: "XAI",
+    period: "08/2025 — 09/2025",
+    tags: ["Angular", "Three.js", "Java", "Spring Boot", "PostgreSQL", "Python", "Docker"],
   },
   {
-    id: "ai-meeting-assistant",
-    slug: "ai-meeting-assistant",
-    title: "AI Meeting & Action Dispatcher",
-    subtitle: "Autonomous Meeting Intelligence & Jira/Linear Dispatcher",
+    id: "smart-hr",
+    title: "Smart HR Solution",
+    subtitle: "PFA internship project — Full Stack & Machine Learning",
     description:
-      "Autonomous bot that joins audio sessions, transcribes technical conversations, identifies action items, and directly creates detailed technical specs on Linear or Jira.",
-    status: "coming_soon",
-    category: "AI Agent",
-    tags: ["Whisper AI", "Claude 3.5 Sonnet", "Linear API", "n8n", "Node.js"],
+      "Intelligent human resources platform that integrates AI to automate and optimize recruitment processes.",
+    category: "Internship",
+    context: "Norsys",
+    period: "07/2025 — 08/2025",
+    tags: ["Python", "Django", "React", "MySQL", "Docker", "Machine Learning"],
   },
   {
-    id: "ai-crm-agent",
-    slug: "ai-crm-agent",
-    title: "Autonomous Lead Enrichment CRM Agent",
-    subtitle: "Self-Operating Sales Intelligence Pipeline",
+    id: "stock-management",
+    title: "Stock Management System",
+    subtitle: "PFA internship project — Full Stack Developer",
     description:
-      "Monitors inbound lead forms, enriches company metadata via public APIs, scores buyer intent using LLMs, and drafts personalized outreach sequences.",
-    status: "coming_soon",
-    category: "Automation",
-    tags: ["Python", "LangChain", "n8n", "PostgreSQL", "HubSpot API"],
+      "Web application for stock management with authentication and role-based access rights.",
+    category: "Internship",
+    context: "RIDA ANIS",
+    period: "07/2025",
+    tags: ["PHP", "MySQL", "HTML", "CSS", "JavaScript", "Bootstrap", "UML"],
   },
   {
-    id: "ai-website-generator",
-    slug: "ai-website-generator",
-    title: "Deterministic Web Spec Generator",
-    subtitle: "Natural Language to Production Next.js Codebase",
+    id: "emotionlearn",
+    title: "EmotionLearn",
+    subtitle: "Emotion detection for education (PFA)",
     description:
-      "Transforms client design briefs into structured JSON component trees, rendering fully responsive production-ready Tailwind/Next.js pages in real time.",
-    status: "coming_soon",
-    category: "LLM App",
-    tags: ["Next.js", "AST Parser", "Tailwind CSS", "OpenAI API"],
+      "Platform that lets teachers adapt their teaching to students' emotions in real time.",
+    category: "Academic",
+    context: "EMSI",
+    tags: ["React", "FastAPI", "Python", "MongoDB", "WebSockets"],
+  },
+  {
+    id: "mobicode",
+    title: "MobiCode",
+    subtitle: "AI-powered mobile code generation and optimization",
+    description:
+      "Tool that generates native Android code (Java) from text prompts, with automatic optimization using NLP models.",
+    category: "Academic",
+    context: "EMSI",
+    tags: ["Java", "Android Studio", "Python", "NLP", "Transformers", "OpenAI API"],
+  },
+  {
+    id: "medicare",
+    title: "MediCare",
+    subtitle: "Teleconsultation application",
+    description:
+      "Platform for remote medical consultation with appointment booking, secure video conferencing, and medical record follow-up.",
+    category: "Academic",
+    context: "EMSI",
+    tags: ["React Native", "Spring Boot / JEE", "Docker", "Kubernetes", "CI/CD"],
+  },
+  {
+    id: "banking-system",
+    title: "Banking Management System",
+    subtitle: "Secure banking application",
+    description:
+      "Secure banking application with account management, transactions, and JWT authentication.",
+    category: "Academic",
+    context: "EMSI",
+    tags: ["Angular", "Spring Boot", "PostgreSQL", "JWT"],
+  },
+  {
+    id: "clinic-management",
+    title: "Medical Clinic Management System",
+    subtitle: "Patient and appointment management platform",
+    description:
+      "Web platform for managing patients, appointments, and medical records, with analytics dashboards and real-time notifications.",
+    category: "Academic",
+    context: "EMSI",
+    tags: ["React", "Laravel", "MySQL", "REST API"],
   },
 ];
 
 export const SERVICES: Service[] = [
   {
-    id: "ai-agents",
-    title: "Agentic AI Systems",
-    eyebrow: "REPLACE MANUAL DECISIONS",
-    outcome: "Autonomous systems that take on complex multi-step tasks, not simple chatbots.",
-    description:
-      "I design and deploy multi-agent systems using LangChain, CrewAI, and n8n that operate autonomously with tool access, structured memory, and human-in-the-loop safety features.",
-    iconName: "Bot",
-    features: [
-      "Multi-agent task orchestration & tool calling",
-      "RAG pipelines over complex enterprise document stores",
-      "Deterministic guardrails against LLM hallucinations",
-      "Structured output generation via Zod/Pydantic",
-    ],
-    deliverables: [
-      "Production Agent Architecture",
-      "Custom Vector Search Index",
-      "Observability Dashboard",
-    ],
-  },
-  {
-    id: "automation",
-    title: "Workflow Automation & n8n",
-    eyebrow: "ELIMINATE REPETITIVE WORK",
-    outcome: "n8n automation pipelines that quietly remove hundreds of hours of manual labor.",
-    description:
-      "Custom, fault-tolerant webhook integrations, data synchronization pipelines, and document processing automation connecting your software stack seamlessly.",
-    iconName: "Workflow",
-    features: [
-      "Self-hosted n8n instance setup & enterprise security",
-      "Custom JavaScript & Python nodes for complex payloads",
-      "Webhook trigger listeners with retry logic & dead-letter queues",
-      "ERP, CRM, and DB bi-directional sync",
-    ],
-    deliverables: [
-      "Automated Workflow Blueprint",
-      "Error Handling & Alert System",
-      "Complete Source & Deployment Scripts",
-    ],
-  },
-  {
     id: "full-stack",
-    title: "Full Stack Product Development",
+    title: "Full Stack Web Development",
     eyebrow: "END-TO-END SOFTWARE",
-    outcome: "Production web applications built for speed, scale, and high-converting UX.",
+    outcome: "Web applications built from the database schema to the user interface.",
     description:
-      "From database schema design to high-performance frontend interfaces in Next.js. Clean architecture, high speed, and technical restraint.",
+      "I build web applications with React or Angular on the front end and Spring Boot, Django, FastAPI, or Laravel on the back end, backed by relational or document databases.",
     iconName: "Layers",
     features: [
-      "Next.js App Router & Server Actions architecture",
-      "TypeScript type-safety across API layers",
-      "PostgreSQL, Supabase, Redis, and Prisma ORM",
-      "Stripe payment gateway & subscription billing",
+      "React and Angular front ends",
+      "Spring Boot, Django, FastAPI, and Laravel back ends",
+      "PostgreSQL, MySQL, and MongoDB data modeling",
+      "Authentication, JWT, and role-based access rights",
     ],
     deliverables: [
-      "Production Next.js Codebase",
-      "Database Schema & Migrations",
-      "CI/CD Pipeline & Vercel/Docker Deployment",
+      "Application Source Code",
+      "Database Schema",
+      "REST API",
     ],
   },
   {
-    id: "api-integration",
-    title: "API Integration & Infrastructure",
-    eyebrow: "UNIFY YOUR TOOLS",
-    outcome: "Connecting legacy systems with modern AI and cloud APIs with zero downtime.",
+    id: "mobile",
+    title: "Mobile Development",
+    eyebrow: "ANDROID & CROSS-PLATFORM",
+    outcome: "Mobile applications connected to a solid back end.",
     description:
-      "Designing robust RESTful and GraphQL APIs, microservice adapters, and real-time streaming endpoints tailored for mission-critical operations.",
-    iconName: "Zap",
+      "I develop mobile applications with React Native and native Android (Java), connected to REST APIs.",
+    iconName: "Smartphone",
     features: [
-      "Custom RESTful & GraphQL API gateway development",
-      "Authentication (OAuth2, JWT, Clerk, NextAuth)",
-      "Rate-limiting, caching, and edge performance optimization",
-      "Third-party vendor API wrapper construction",
+      "React Native cross-platform apps",
+      "Native Android development in Java",
+      "REST API integration",
+      "Real-time features with WebSockets",
     ],
     deliverables: [
-      "OpenAPI / Swagger Documentation",
-      "SDK Integration Modules",
-      "Load Test & Security Report",
+      "Mobile Application Source Code",
+      "API Integration Layer",
     ],
   },
   {
-    id: "consulting",
-    title: "AI Strategy & Technical Consulting",
-    eyebrow: "ENGINEERING RESTRAINT",
-    outcome: "An honest engineering read on whether AI actually solves your business problem.",
+    id: "ai-ml",
+    title: "AI & Machine Learning Integration",
+    eyebrow: "INTELLIGENT FEATURES",
+    outcome: "AI features integrated into real applications, not isolated notebooks.",
     description:
-      "Architecture reviews, feasibility audits, and cost estimation before you invest in expensive AI development. I help founders filter hype from high-ROI implementation.",
+      "I integrate machine learning, computer vision, NLP, and generative AI into web and mobile products — from emotion detection to AI-assisted recruitment and code generation.",
     iconName: "BrainCircuit",
     features: [
-      "LLM latency & token cost optimization audits",
-      "Tech stack evaluation (OpenAI vs Anthropic vs Open Source)",
-      "Build vs Buy software strategy assessment",
-      "Security & data privacy compliance roadmap",
+      "Computer vision with OpenCV and TensorFlow",
+      "NLP and Transformers models",
+      "OpenAI API integration",
+      "Generative and agentic AI",
     ],
     deliverables: [
-      "Technical Architecture Specification",
-      "Cost & Latency Projection Model",
-      "Actionable 60-Day Roadmap",
+      "Model Integration",
+      "Python Service (FastAPI / Django)",
+    ],
+  },
+  {
+    id: "devops",
+    title: "DevOps & Deployment",
+    eyebrow: "SHIP IT",
+    outcome: "Containerized applications with an automated delivery pipeline.",
+    description:
+      "I containerize applications with Docker, orchestrate them with Kubernetes, and automate delivery with CI/CD pipelines.",
+    iconName: "Server",
+    features: [
+      "Docker containerization",
+      "Kubernetes orchestration",
+      "CI/CD pipelines",
+      "Git and GitHub workflows",
+    ],
+    deliverables: [
+      "Dockerfiles & Compose Files",
+      "CI/CD Pipeline Configuration",
     ],
   },
 ];
 
 export const TECH_STACK: TechItem[] = [
-  // AI & Agents
-  { name: "Python", category: "AI & Agents", level: "Expert", description: "Primary language for AI pipelines, Data & Agentic logic." },
-  { name: "LangChain / LlamaIndex", category: "AI & Agents", level: "Advanced", description: "RAG frameworks, vector store connectors, and agent tools." },
-  { name: "OpenAI / Claude API", category: "AI & Agents", level: "Expert", description: "Function calling, vision models, and prompt engineering." },
-  { name: "n8n Automation", category: "AI & Agents", level: "Expert", description: "Self-hosted workflow orchestration and webhook automation." },
-  { name: "Qdrant / Pinecone", category: "AI & Agents", level: "Advanced", description: "Vector databases for semantic search and memory." },
-  { name: "Whisper & Local LLMs", category: "AI & Agents", level: "Intermediate", description: "Speech recognition and Ollama self-hosted inference." },
-  
-  // Frontend
-  { name: "Next.js 14", category: "Frontend", level: "Expert", description: "App Router, SSR, Server Components, and Edge Functions." },
-  { name: "TypeScript", category: "Frontend", level: "Expert", description: "Strict type-safe interfaces across client and server." },
-  { name: "React 18", category: "Frontend", level: "Expert", description: "Custom hooks, state management, and modern component architecture." },
-  { name: "Tailwind CSS", category: "Frontend", level: "Expert", description: "Utility-first responsive design systems and dark mode." },
-  { name: "Framer Motion", category: "Frontend", level: "Advanced", description: "Micro-interactions, magnetic buttons, and page transitions." },
+  // Frontend & Mobile
+  { name: "React", category: "Frontend & Mobile", description: "Used on EmotionLearn, the Smart HR Solution, and the clinic management platform." },
+  { name: "Angular", category: "Frontend & Mobile", description: "Used on the Smart Real Estate Platform and the banking management system." },
+  { name: "React Native", category: "Frontend & Mobile", description: "Cross-platform mobile development, used on MediCare." },
+  { name: "Android (Java)", category: "Frontend & Mobile", description: "Native Android development with Android Studio, used on MobiCode." },
+  { name: "Three.js", category: "Frontend & Mobile", description: "Interactive 3D models in the browser." },
+  { name: "Tailwind CSS / Bootstrap", category: "Frontend & Mobile", description: "HTML, CSS, JavaScript, and responsive UI frameworks." },
 
-  // Backend & Infra
-  { name: "Node.js / Express", category: "Backend & Infra", level: "Expert", description: "High-concurrency async APIs and backend services." },
-  { name: "PostgreSQL / Supabase", category: "Backend & Infra", level: "Expert", description: "Relational database modeling, row-level security, vector extensions." },
-  { name: "Redis", category: "Backend & Infra", level: "Advanced", description: "Caching layer, rate limiting, and pub/sub queues." },
-  { name: "Docker / Vercel", category: "Backend & Infra", level: "Advanced", description: "Containerized deployment and serverless edge hosting." },
-  { name: "Git / CI/CD", category: "Backend & Infra", level: "Expert", description: "GitHub Actions, automated testing, and release management." },
+  // Backend & Data
+  { name: "Java / Spring Boot", category: "Backend & Data", description: "REST APIs and JEE back ends with JWT authentication." },
+  { name: "Python / Django / FastAPI", category: "Backend & Data", description: "Web back ends and AI services, including WebSockets." },
+  { name: "PHP / Laravel", category: "Backend & Data", description: "Web applications and REST APIs." },
+  { name: "C# / .NET", category: "Backend & Data", description: "Also programming in C and C++." },
+  { name: "PostgreSQL / MySQL", category: "Backend & Data", description: "Relational databases, plus Oracle and SQL Server." },
+  { name: "MongoDB", category: "Backend & Data", description: "Document database and the MERN stack." },
+  { name: "Hadoop / Power BI", category: "Backend & Data", description: "Big data processing and data visualization." },
+
+  // AI/ML & DevOps
+  { name: "TensorFlow", category: "AI/ML & DevOps", description: "Deep learning models." },
+  { name: "OpenCV", category: "AI/ML & DevOps", description: "Computer vision." },
+  { name: "NLP / Transformers", category: "AI/ML & DevOps", description: "NLP models and the OpenAI API, used on MobiCode." },
+  { name: "Generative & Agentic AI", category: "AI/ML & DevOps", description: "GenAIOT training program and enterprise project at Fusion AI." },
+  { name: "Docker / Kubernetes", category: "AI/ML & DevOps", description: "Containerization and orchestration." },
+  { name: "Git / CI/CD", category: "AI/ML & DevOps", description: "Git, GitHub, and continuous integration and delivery pipelines." },
 ];
 
 export const TIMELINE: TimelineItem[] = [
   {
-    id: "postule",
-    period: "2024 — Present",
-    role: "Founder & Lead AI Engineer",
-    institution: "Postule.ma",
+    id: "fusion-ai",
+    period: "4 months",
+    role: "AI Engineering Intern — Enterprise Project",
+    institution: "Fusion AI",
     type: "experience",
-    location: "Morocco / Remote",
     description:
-      "Architected and shipped an AI job matching platform handling resume parsing, semantic embedding matching, and autonomous n8n application workflows.",
+      "In-company project internship completed as the second half of the GenAIOT training program.",
     highlights: [
-      "Built custom parsing pipeline processing structured CV data with 94.8% accuracy.",
-      "Engineered automated n8n workflows eliminating manual candidate application steps.",
-      "Grew platform to serve thousands of automated job matches.",
+      "4-month enterprise project carried out within the Fusion AI team.",
+      "Applied the generative and agentic AI curriculum to a real business use case.",
     ],
   },
   {
     id: "genaiot",
-    period: "2023 — 2024",
-    role: "AI Systems Engineer",
+    period: "8 months",
+    role: "Generative & Agentic AI Training Program",
     institution: "GenAIOT",
-    type: "experience",
-    location: "France / Remote",
+    type: "education",
     description:
-      "Developed generative AI solutions, agentic workflows, and IoT data ingestion platforms for enterprise clients.",
+      "8-month training program: 4 months of theory followed by a 4-month in-company project internship at Fusion AI.",
     highlights: [
-      "Integrated LLM function-calling workflows into production IoT dashboards.",
-      "Designed RAG document search engines for internal technical knowledge bases.",
-      "Optimized API query latency by 40% through Redis caching layer.",
+      "Theory — 2 months: common core.",
+      "Theory — 2 months: agentic AI specialization.",
+      "Practice — 4 months: enterprise project internship at Fusion AI.",
     ],
   },
   {
-    id: "master-ia",
-    period: "2022 — 2024",
-    role: "Master’s Degree in Artificial Intelligence",
-    institution: "Université Côte d'Azur",
-    type: "education",
-    location: "Nice, France",
+    id: "xai",
+    period: "08/2025 — 09/2025",
+    role: "AI & Full Stack Developer Intern",
+    institution: "XAI",
+    type: "experience",
     description:
-      "Advanced studies in Machine Learning, Deep Neural Networks, Natural Language Processing, and Computer Vision.",
+      "Smart Real Estate Platform: a web application to visualize and manage real estate properties, integrating interactive 3D models.",
     highlights: [
-      "Specialized in NLP transformer architectures and LLM fine-tuning.",
-      "Published research benchmarks on document parsing accuracy.",
+      "Angular, Three.js, Java, Spring Boot, PostgreSQL, Python, Docker.",
+    ],
+  },
+  {
+    id: "norsys",
+    period: "07/2025 — 08/2025",
+    role: "Full Stack & Machine Learning Developer Intern (PFA)",
+    institution: "Norsys",
+    type: "experience",
+    description:
+      "Smart HR Solution: an intelligent human resources platform integrating AI to automate and optimize recruitment processes.",
+    highlights: [
+      "Python, Django, React, MySQL, Docker, Machine Learning.",
+    ],
+  },
+  {
+    id: "rida-anis",
+    period: "07/2025",
+    role: "Full Stack Developer Intern (PFA)",
+    institution: "RIDA ANIS",
+    type: "experience",
+    description:
+      "Stock management system: a web application with authentication and role-based access rights.",
+    highlights: [
+      "PHP, MySQL, HTML, CSS, JavaScript, Bootstrap, XAMPP, UML.",
     ],
   },
   {
     id: "emsi",
-    period: "2019 — 2024",
-    role: "State Engineering Degree in Computer Science",
+    period: "2021 — Present",
+    role: "Engineering Degree in Computer Science & Networks",
     institution: "EMSI (École Marocaine des Sciences de l'Ingénieur)",
     type: "education",
     location: "Morocco",
     description:
-      "Comprehensive computer engineering program covering Software Architecture, Algorithms, Data Structures, and Systems Engineering.",
+      "Preparatory cycle (2021 — 2023) followed by the engineering cycle (2023 — present).",
     highlights: [
-      "Graduated with Top Honors in Software Engineering.",
-      "Led university developer collective for open-source AI projects.",
+      "Advanced programming, web development, and databases.",
+      "Network administration, DevOps, and cloud computing.",
+      "Artificial intelligence.",
     ],
   },
 ];
 
+export const CERTIFICATIONS = [
+  "Meta Developer Certificates (Front-End & Back-End)",
+  "Introduction to Docker",
+  "PSM I",
+  "Google Data Analytics",
+];
+
+export const LANGUAGES = [
+  { name: "Arabic", level: "Native" },
+  { name: "French", level: "Fluent" },
+  { name: "English", level: "Intermediate" },
+];
+
 export const BLOG_POSTS: BlogPost[] = [
-  {
-    slug: "building-agentic-workflows-n8n-langchain",
-    title: "Building Production Agentic Workflows with n8n and LangChain",
-    summary:
-      "How to combine self-hosted n8n automation with deterministic Python LLM guardrails to build autonomous business systems that never fail silently.",
-    date: "August 2026",
-    readTime: "6 min read",
-    category: "AI Engineering",
-    content: `
-# Building Production Agentic Workflows with n8n and LangChain
-
-Most AI agent demos break down when faced with real-world enterprise edge cases: rate limits, unhandled API schemas, and stochastic LLM outputs. In this deep dive, we explore how pairing **self-hosted n8n** with **LangChain structured output parsers** creates a resilient production architecture.
-
-## The Core Philosophy: Deterministic Outer Loop, Stochastic Inner Engine
-
-When designing an autonomous agent:
-1. **Never let an LLM control critical control flow without validation.**
-2. **Use Zod or Pydantic schemas** to enforce strict JSON signatures.
-3. **Offload retries, authentication, and state management** to n8n.
-
-\`\`\`python
-from langchain_core.pydantic_v1 import BaseModel, Field
-
-class AgentAction(BaseModel):
-    action_type: str = Field(description="One of: 'SEARCH', 'DISPATCH', 'ESCALATE'")
-    payload: dict = Field(description="Arguments for the selected tool")
-    confidence_score: float = Field(description="Model confidence between 0 and 1")
-\`\`\`
-
-## System Architecture
-
-Our setup routes inbound webhook events into n8n. n8n calls a microservice running Python/LangChain which evaluates the decision matrix, returns a validated schema, and executes the payload.
-
-### Key Results
-- Zero unhandled crash rate across 50,000+ executions.
-- Average processing latency under 900ms.
-`,
-  },
-  {
-    slug: "parsing-resumes-at-scale-postule-ma",
-    title: "Parsing Resumes at Scale: Lessons Learned from Postule.ma",
-    summary:
-      "PDF columnar layouts, arbitrary typography, and multi-language CVs pose massive challenges. Here is how we achieved 94.8% parse accuracy without burning thousands in token costs.",
-    date: "July 2026",
-    readTime: "8 min read",
-    category: "Case Study",
-    content: `
-# Parsing Resumes at Scale: Lessons Learned from Postule.ma
-
-When building **Postule.ma**, one of our primary technical hurdles was digesting arbitrary candidate CV formats. Candidates upload everything from 3-column Figma exports to scanned JPEGs.
-
-## Step 1: Layout Extraction over Raw Text Dump
-
-Passing raw PDF text to an LLM destroys spatial context. A multi-column CV often merges text across columns horizontally.
-
-We solved this using **PyMuPDF font bounding box extraction** combined with a visual block ordering pass before LLM prompt submission.
-
-\`\`\`typescript
-interface ParsedCandidateProfile {
-  fullName: string;
-  contact: { email: string; phone?: string; linkedin?: string };
-  skills: { hardSkills: string[]; softSkills: string[] };
-  workExperience: Array<{ company: string; role: string; duration: string; impactPoints: string[] }>;
-  education: Array<{ degree: string; institution: string; year: string }>;
-}
-\`\`\`
-
-## Step 2: Semantic Vector Embedding
-
-Once extracted, candidate profiles are converted into dense vector embeddings using OpenAI \`text-embedding-3-small\` and stored in Qdrant, enabling sub-second matching against job descriptions.
-`,
-  },
   {
     slug: "demo-to-production-gap-ai",
     title: "Why AI Products Fail in the Demo-to-Production Gap",
