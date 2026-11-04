@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { PROJECTS } from "@/lib/data";
+import { findPublicImage } from "@/lib/assets";
 import { Reveal } from "../ui/Reveal";
 
 // Stylized app window standing in for a project screenshot
-function ProjectVisual({ title, tags }: { title: string; tags: string[] }) {
+function ProjectVisual({ title, tags, image }: { title: string; tags: string[]; image: string | null }) {
   const initials = title
     .split(" ")
     .slice(0, 2)
@@ -19,6 +20,10 @@ function ProjectVisual({ title, tags }: { title: string; tags: string[] }) {
           <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
         </div>
+        {image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={image} alt={`Screenshot of ${title}`} loading="lazy" className="aspect-[16/10] w-full object-cover object-top" />
+        ) : (
         <div className="flex aspect-[16/10] flex-col items-center justify-center gap-4 p-6">
           <span className="font-display text-6xl font-bold text-white/90 sm:text-7xl">{initials}</span>
           <ul className="flex flex-wrap justify-center gap-2" aria-hidden>
@@ -29,6 +34,7 @@ function ProjectVisual({ title, tags }: { title: string; tags: string[] }) {
             ))}
           </ul>
         </div>
+        )}
       </div>
     </div>
   );
@@ -44,7 +50,7 @@ export function FeaturedProjects() {
         return (
           <article key={project.id} className="grid items-center gap-8 lg:grid-cols-12">
             <Reveal className={`lg:col-span-7 lg:row-start-1 ${flip ? "lg:col-start-6" : "lg:col-start-1"}`}>
-              <ProjectVisual title={project.title} tags={project.tags} />
+              <ProjectVisual title={project.title} tags={project.tags} image={findPublicImage(`projects/${project.id}`)} />
             </Reveal>
             <Reveal
               delay={0.1}

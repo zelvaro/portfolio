@@ -2,7 +2,7 @@
 
 Personal portfolio of **Sabir Essaad**, Computer Science & Networks engineering student at EMSI and Full Stack & AI developer.
 
-It presents my internships, academic projects, tech stack, services and a short blog, plus a downloadable CV.
+It presents my internships, academic projects and tech stack, plus a downloadable CV.
 
 ## Tech stack
 
@@ -15,13 +15,11 @@ It presents my internships, academic projects, tech stack, services and a short 
 
 | Route       | Content                                              |
 |-------------|------------------------------------------------------|
-| `/`         | Hero, projects, services, tech stack, timeline, blog |
+| `/`         | Hero, experience, tech stack, featured projects, contact |
 | `/work`     | Internship & academic projects, filterable           |
-| `/about`    | Background, principles, certifications, languages    |
-| `/services` | What I build: full stack, mobile, AI/ML, DevOps      |
-| `/blog`     | Articles                                             |
+| `/about`    | Background, timeline, tech stack, certifications     |
 | `/contact`  | Contact form                                         |
-| `/cv.pdf`   | Resume                                               |
+| `/cv.pdf`   | Resume (PDF in `public/`)                            |
 
 ## Getting started
 
@@ -52,7 +50,7 @@ app/          Pages and routes (App Router)
 components/
   home/       Home page sections
   ui/         Shared UI (navbar, footer, cards, cursor…)
-lib/data.ts   All content: profile, projects, services, stack, timeline, blog
+lib/data.ts   All content: profile, projects, stack, timeline
 ```
 
 To update the content, edit `lib/data.ts` — no component changes needed.

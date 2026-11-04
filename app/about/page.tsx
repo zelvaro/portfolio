@@ -5,7 +5,6 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { Timeline } from "@/components/home/TimelineSection";
-import { TechStackGrid } from "@/components/home/TechStackGrid";
 
 export const metadata: Metadata = { title: "About — Sabir Essaad" };
 
@@ -59,10 +58,6 @@ export default function AboutPage() {
 
       <Section id="experience" title="Experience and education">
         <Timeline />
-      </Section>
-
-      <Section id="stack" title="Tech stack" intro="The tools I use most, each one tied to a real project.">
-        <TechStackGrid />
       </Section>
 
       <Section title="Certifications and languages">

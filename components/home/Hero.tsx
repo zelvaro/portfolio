@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { PERSONAL_INFO } from "@/lib/data";
+import { Stats } from "./Stats";
 
-const ROLES = ["Full Stack Developer.", "AI Engineering Intern.", "Engineering Student."];
+const ROLES = ["a Full Stack Developer.", "an AI Engineering Intern.", "an Engineering Student."];
 const ease = [0.22, 1, 0.36, 1] as const;
 
 // Types each role, pauses, erases it, then moves to the next one
@@ -34,7 +35,7 @@ function useTypewriter(words: string[], enabled: boolean) {
   return text;
 }
 
-export function Hero() {
+export function Hero({ avatarSrc }: { avatarSrc?: string | null }) {
   const reduce = useReducedMotion() ?? false;
   const role = useTypewriter(ROLES, !reduce);
   const enter = (i: number) => ({
@@ -51,9 +52,18 @@ export function Hero() {
         <motion.div {...enter(0)} className="flex flex-col items-center gap-5 sm:flex-row sm:text-left">
           <div className="relative">
             <span aria-hidden className="absolute inset-0 rounded-full bg-accent-deep blur-2xl" />
-            <span className="relative flex h-24 w-24 items-center justify-center rounded-full border border-accent/40 bg-gradient-to-br from-[#2B1052] to-[#6D28D9] font-display text-3xl font-bold sm:h-28 sm:w-28">
-              SE
-            </span>
+            {avatarSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={avatarSrc}
+                alt={`Portrait of ${PERSONAL_INFO.name}`}
+                className="relative h-24 w-24 rounded-full border-2 border-accent/60 object-cover sm:h-28 sm:w-28"
+              />
+            ) : (
+              <span className="relative flex h-24 w-24 items-center justify-center rounded-full border border-accent/40 bg-gradient-to-br from-[#2B1052] to-[#6D28D9] font-display text-3xl font-bold sm:h-28 sm:w-28">
+                SE
+              </span>
+            )}
           </div>
           <div>
             <p className="text-sm text-muted">
@@ -66,7 +76,7 @@ export function Hero() {
         </motion.div>
 
         <motion.p {...enter(1)} className="mt-12 font-display text-2xl font-medium sm:text-4xl" aria-live="off">
-          I&apos;m a <span className="sr-only">{ROLES.join(" ")}</span>
+          I&apos;m <span className="sr-only">{ROLES.join(" ")}</span>
           <span aria-hidden>
             {role}
             <span className="ml-0.5 inline-block w-[2px] animate-blink bg-ink align-middle" style={{ height: "1em" }} />
@@ -90,12 +100,16 @@ export function Hero() {
           </a>
         </motion.div>
 
-        <motion.p {...enter(5)} className="mt-8 inline-flex items-center gap-2 text-sm text-muted">
+        <motion.div {...enter(5)} className="mt-14 w-full">
+          <Stats />
+        </motion.div>
+
+        <motion.p {...enter(6)} className="mt-10 inline-flex items-center gap-2 text-sm text-muted">
           <span className="relative flex h-2 w-2" aria-hidden>
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-signal" />
           </span>
-          {PERSONAL_INFO.status}, based in {PERSONAL_INFO.location}
+          {PERSONAL_INFO.status}, based in {PERSONAL_INFO.location.split(",")[0]}
         </motion.p>
       </div>
     </section>

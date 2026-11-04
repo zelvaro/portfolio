@@ -9,17 +9,6 @@ export interface Project {
   tags: string[];
 }
 
-export interface Service {
-  id: string;
-  title: string;
-  eyebrow: string;
-  outcome: string;
-  description: string;
-  iconName: string;
-  features: string[];
-  deliverables: string[];
-}
-
 export interface TechItem {
   name: string;
   category: "Frontend & Mobile" | "Backend & Data" | "AI & DevOps";
@@ -35,16 +24,6 @@ export interface TimelineItem {
   location?: string;
   description: string;
   highlights: string[];
-}
-
-export interface BlogPost {
-  slug: string;
-  title: string;
-  summary: string;
-  date: string;
-  readTime: string;
-  category: string;
-  content: string;
 }
 
 export const PERSONAL_INFO = {
@@ -169,86 +148,6 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-export const SERVICES: Service[] = [
-  {
-    id: "full-stack",
-    title: "Full Stack Web Development",
-    eyebrow: "END-TO-END SOFTWARE",
-    outcome: "Web applications built from the database schema to the user interface.",
-    description:
-      "I build web applications with React or Angular on the front end and Spring Boot, Django, FastAPI, or Laravel on the back end, backed by relational or document databases.",
-    iconName: "Layers",
-    features: [
-      "React and Angular front ends",
-      "Spring Boot, Django, FastAPI, and Laravel back ends",
-      "PostgreSQL, MySQL, and MongoDB data modeling",
-      "Authentication, JWT, and role-based access rights",
-    ],
-    deliverables: [
-      "Application Source Code",
-      "Database Schema",
-      "REST API",
-    ],
-  },
-  {
-    id: "mobile",
-    title: "Mobile Development",
-    eyebrow: "ANDROID & CROSS-PLATFORM",
-    outcome: "Mobile applications connected to a solid back end.",
-    description:
-      "I develop mobile applications with React Native and native Android (Java), connected to REST APIs.",
-    iconName: "Smartphone",
-    features: [
-      "React Native cross-platform apps",
-      "Native Android development in Java",
-      "REST API integration",
-      "Real-time features with WebSockets",
-    ],
-    deliverables: [
-      "Mobile Application Source Code",
-      "API Integration Layer",
-    ],
-  },
-  {
-    id: "ai-ml",
-    title: "AI & Machine Learning Integration",
-    eyebrow: "INTELLIGENT FEATURES",
-    outcome: "AI features integrated into real applications, not isolated notebooks.",
-    description:
-      "I integrate machine learning, computer vision, NLP, and generative AI into web and mobile products — from emotion detection to AI-assisted recruitment and code generation.",
-    iconName: "BrainCircuit",
-    features: [
-      "Computer vision with OpenCV and TensorFlow",
-      "NLP and Transformers models",
-      "OpenAI API integration",
-      "Generative and agentic AI",
-    ],
-    deliverables: [
-      "Model Integration",
-      "Python Service (FastAPI / Django)",
-    ],
-  },
-  {
-    id: "devops",
-    title: "DevOps & Deployment",
-    eyebrow: "SHIP IT",
-    outcome: "Containerized applications with an automated delivery pipeline.",
-    description:
-      "I containerize applications with Docker, orchestrate them with Kubernetes, and automate delivery with CI/CD pipelines.",
-    iconName: "Server",
-    features: [
-      "Docker containerization",
-      "Kubernetes orchestration",
-      "CI/CD pipelines",
-      "Git and GitHub workflows",
-    ],
-    deliverables: [
-      "Dockerfiles & Compose Files",
-      "CI/CD Pipeline Configuration",
-    ],
-  },
-];
-
 export const TECH_STACK: TechItem[] = [
   // Frontend & Mobile
   { name: "React", category: "Frontend & Mobile", description: "EmotionLearn, Smart HR Solution, clinic management platform." },
@@ -364,27 +263,4 @@ export const LANGUAGES = [
   { name: "Arabic", level: "Native" },
   { name: "French", level: "Fluent" },
   { name: "English", level: "Intermediate" },
-];
-
-export const BLOG_POSTS: BlogPost[] = [
-  {
-    slug: "demo-to-production-gap-ai",
-    title: "Why AI Products Fail in the Demo-to-Production Gap",
-    summary:
-      "Why 90% of prototype AI agents never reach production — and the 3 technical principles that guarantee reliability in real software.",
-    date: "June 2026",
-    readTime: "5 min read",
-    category: "Software Engineering",
-    content: `
-# Why AI Products Fail in the Demo-to-Production Gap
-
-Building an impressive 30-second Twitter video with an AI wrapper is easy. Building a system that operates 24/7 without corrupting database state is hard.
-
-## The 3 Pillars of Production AI
-
-1. **Human-in-the-Loop Thresholds**: If confidence is below 85%, route to human review instead of taking autonomous action.
-2. **Token & Latency Budgeting**: Set strict timeout boundaries and streaming fallbacks.
-3. **Observability**: Log raw prompt inputs, system outputs, and latency per step.
-`,
-  },
 ];

@@ -1,110 +1,162 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { BrainCircuit, Sparkles, type LucideIcon } from "lucide-react";
+import { TECH_STACK, type TechItem } from "@/lib/data";
 import { Monogram } from "../ui/Monogram";
+import { Reveal } from "../ui/Reveal";
 
 const ICON_BASE = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
 
-const TECH: { name: string; path: string; invert?: boolean }[] = [
+type Logo = { name: string; path: string; invert?: boolean };
+
+const OUTER: Logo[] = [
   { name: "React", path: "react/react-original.svg" },
   { name: "Angular", path: "angular/angular-original.svg" },
-  { name: "Next.js", path: "nextjs/nextjs-original.svg", invert: true },
+  { name: "Next.js", path: "nextjs/nextjs-original.svg" },
   { name: "Tailwind CSS", path: "tailwindcss/tailwindcss-original.svg" },
   { name: "TypeScript", path: "typescript/typescript-original.svg" },
   { name: "Java", path: "java/java-original.svg" },
   { name: "Spring Boot", path: "spring/spring-original.svg" },
   { name: "Python", path: "python/python-original.svg" },
+];
+
+const INNER: Logo[] = [
   { name: "Django", path: "django/django-plain.svg", invert: true },
   { name: "FastAPI", path: "fastapi/fastapi-original.svg" },
   { name: "PostgreSQL", path: "postgresql/postgresql-original.svg" },
-  { name: "MySQL", path: "mysql/mysql-original.svg", invert: true },
   { name: "MongoDB", path: "mongodb/mongodb-original.svg" },
   { name: "Docker", path: "docker/docker-original.svg" },
   { name: "Git", path: "git/git-original.svg" },
 ];
 
-const ORBIT_DOTS = [
-  { x: "8%", y: "62%", d: 0 },
-  { x: "18%", y: "30%", d: 0.6 },
-  { x: "30%", y: "78%", d: 1.2 },
-  { x: "70%", y: "78%", d: 0.3 },
-  { x: "82%", y: "30%", d: 0.9 },
-  { x: "92%", y: "62%", d: 1.5 },
-];
+// Icon shown next to each core technology in the category cards
+const STACK_ICONS: Record<string, Logo | LucideIcon> = {
+  React: OUTER[0],
+  Angular: OUTER[1],
+  "React Native": OUTER[0],
+  "Tailwind CSS": OUTER[3],
+  "Java & Spring Boot": OUTER[6],
+  "Python, Django & FastAPI": OUTER[7],
+  "PostgreSQL & MySQL": INNER[2],
+  MongoDB: INNER[3],
+  "Generative & agentic AI": Sparkles,
+  "NLP & Transformers": BrainCircuit,
+  Docker: INNER[4],
+  "Git & CI/CD": INNER[5],
+};
+
+const GROUPS: TechItem["category"][] = ["Frontend & Mobile", "Backend & Data", "AI & DevOps"];
+
+function LogoImg({ logo, className = "h-6 w-6" }: { logo: Logo; className?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={`${ICON_BASE}/${logo.path}`}
+      alt=""
+      loading="lazy"
+      className={`${className} ${logo.invert ? "brightness-0 invert" : ""}`}
+    />
+  );
+}
+
+function Ring({ logos, radius, duration, reverse, reduce }: { logos: Logo[]; radius: number; duration: number; reverse?: boolean; reduce: boolean }) {
+  const turn = reverse ? -360 : 360;
+  return (
+    <motion.div
+      className="absolute inset-0"
+      animate={reduce ? undefined : { rotate: turn }}
+      transition={{ duration, repeat: Infinity, ease: "linear" }}
+    >
+      <span
+        aria-hidden
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-accent/30"
+        style={{ width: `${radius * 2}%`, height: `${radius * 2}%` }}
+      />
+      {logos.map((logo, i) => {
+        const angle = (i / logos.length) * Math.PI * 2;
+        return (
+          <div
+            key={logo.name}
+            className="absolute -translate-x-1/2 -translate-y-1/2"
+            style={{ left: `${50 + radius * Math.cos(angle)}%`, top: `${50 + radius * Math.sin(angle)}%` }}
+          >
+            <motion.span
+              title={logo.name}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-[#26124A] shadow-[0_0_18px_rgb(124_58_237/0.45)] sm:h-12 sm:w-12"
+              animate={reduce ? undefined : { rotate: -turn }}
+              transition={{ duration, repeat: Infinity, ease: "linear" }}
+            >
+              <LogoImg logo={logo} className="h-5 w-5 sm:h-6 sm:w-6" />
+            </motion.span>
+          </div>
+        );
+      })}
+    </motion.div>
+  );
+}
 
 export function StackOrbit() {
   const reduce = useReducedMotion() ?? false;
 
   return (
-    <div className="flex flex-col items-center text-center">
-      <p className="max-w-xl font-display text-xl font-medium sm:text-2xl">
-        I&apos;m looking to join a team that builds <span className="text-gradient">AI-powered products</span>
-      </p>
-      <p className="mt-2 text-sm text-muted sm:text-base">from the database to the interface, and into production.</p>
+    <div className="flex flex-col items-center">
+      <Reveal className="text-center">
+        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          Technologies I <span className="text-gradient">work with</span>
+        </h2>
+        <p className="mx-auto mt-3 max-w-xl text-muted sm:text-lg">
+          From the database to the interface, and into production. I&apos;m looking to join a team that builds
+          AI-powered products.
+        </p>
+      </Reveal>
 
-      <ul className="mt-8 flex max-w-xl flex-wrap justify-center gap-3" aria-label="Technologies I use">
-        {TECH.map((tech, i) => (
-          <motion.li
-            key={tech.name}
-            initial={reduce ? false : { opacity: 0, scale: 0.6 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.04, type: "spring", stiffness: 260, damping: 18 }}
-            className="group relative"
-          >
-            <span className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-[#26124A] transition-colors group-hover:border-accent sm:h-12 sm:w-12">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`${ICON_BASE}/${tech.path}`} alt={tech.name} loading="lazy" className={`h-6 w-6 ${tech.invert ? "brightness-0 invert" : ""}`} />
-            </span>
-            <span className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-surface px-2 py-0.5 text-xs opacity-0 transition-opacity group-hover:opacity-100">
-              {tech.name}
-            </span>
-          </motion.li>
-        ))}
-      </ul>
-
-      {/* Lines converging into the orbit */}
-      <svg aria-hidden viewBox="0 0 600 180" preserveAspectRatio="none" className="mt-4 h-28 w-full max-w-xl sm:h-40">
-        {[40, 120, 200, 260, 340, 400, 480, 560].map((x, i) => (
-          <motion.path
-            key={x}
-            d={`M${x} 0 C ${x} 90, 300 90, 300 180`}
-            stroke="rgb(var(--accent) / 0.35)"
-            strokeWidth="1"
-            fill="none"
-            initial={reduce ? false : { pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.4, delay: 0.2 + i * 0.05, ease: "easeOut" }}
-          />
-        ))}
-      </svg>
-
-      <div aria-hidden className="relative -mt-2 h-56 w-full max-w-3xl sm:h-64">
-        <div className="halo absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2" />
-        {[100, 78, 56].map((w, i) => (
-          <span
-            key={w}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[50%] border border-accent/25"
-            style={{ width: `${w}%`, height: `${30 + i * 8}%` }}
-          />
-        ))}
-        {ORBIT_DOTS.map((dot) => (
-          <motion.span
-            key={dot.x + dot.y}
-            className="absolute h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_rgb(var(--accent))]"
-            style={{ left: dot.x, top: dot.y }}
-            animate={reduce ? undefined : { y: [0, -8, 0], opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 3, repeat: Infinity, delay: dot.d, ease: "easeInOut" }}
-          />
-        ))}
+      <div
+        role="img"
+        aria-label="Orbit of the technologies I use: React, Angular, Next.js, Tailwind CSS, TypeScript, Java, Spring Boot, Python, Django, FastAPI, PostgreSQL, MongoDB, Docker and Git"
+        className="relative mt-10 aspect-square w-full max-w-[340px] sm:max-w-[520px]"
+      >
+        <div aria-hidden className="halo absolute inset-[15%]" />
+        <Ring logos={OUTER} radius={46} duration={60} reduce={reduce} />
+        <Ring logos={INNER} radius={28} duration={45} reverse reduce={reduce} />
         <motion.div
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-          animate={reduce ? undefined : { scale: [1, 1.05, 1] }}
+          animate={reduce ? undefined : { scale: [1, 1.06, 1] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <Monogram className="h-24 w-24 text-2xl shadow-[0_0_60px_rgb(124_58_237/0.8)] sm:h-28 sm:w-28 sm:text-3xl" />
+          <Monogram className="h-20 w-20 text-xl shadow-[0_0_70px_rgb(124_58_237/0.9)] sm:h-28 sm:w-28 sm:text-3xl" />
         </motion.div>
+      </div>
+
+      <div className="mt-12 grid w-full gap-4 md:grid-cols-3">
+        {GROUPS.map((group, gi) => (
+          <Reveal key={group} delay={gi * 0.08} className="card-glow p-6">
+            <h3 className="text-lg font-semibold">{group}</h3>
+            <ul className="mt-5 space-y-4">
+              {TECH_STACK.filter((t) => t.category === group).map((tech) => {
+                const icon = STACK_ICONS[tech.name];
+                return (
+                  <li key={tech.name} className="group flex items-start gap-3">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-[#26124A] transition-all group-hover:border-accent group-hover:shadow-[0_0_16px_rgb(124_58_237/0.6)]">
+                      {icon && "path" in icon ? (
+                        <LogoImg logo={icon as Logo} className="h-5 w-5" />
+                      ) : icon ? (
+                        (() => {
+                          const Icon = icon as LucideIcon;
+                          return <Icon className="h-5 w-5 text-accent" aria-hidden />;
+                        })()
+                      ) : null}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="font-semibold leading-tight">{tech.name}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-muted">{tech.description}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </Reveal>
+        ))}
       </div>
     </div>
   );

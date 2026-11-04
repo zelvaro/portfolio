@@ -1,7 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Check, Copy } from "lucide-react";
@@ -13,23 +12,13 @@ const PROJECT_TYPES = [
   "Full stack web app",
   "Mobile app",
   "AI integration",
-  "DevOps & deployment",
+  "Other",
 ];
-
-const SERVICE_TO_TYPE: Record<string, string> = {
-  "full-stack": "Full stack web app",
-  mobile: "Mobile app",
-  "ai-ml": "AI integration",
-  devops: "DevOps & deployment",
-};
 
 const inputClass =
   "w-full rounded-xl border border-line bg-bg px-4 py-3 text-base text-ink placeholder:text-subtle transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20";
 
 function ContactForm() {
-  const searchParams = useSearchParams();
-  const serviceParam = searchParams.get("service");
-
   const [selectedType, setSelectedType] = useState(PROJECT_TYPES[0]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -41,10 +30,6 @@ function ContactForm() {
   // Set NEXT_PUBLIC_FORMSPREE_ID to send messages through Formspree.
   // Without it, the form opens the visitor's email client with the message pre-filled.
   const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
-
-  useEffect(() => {
-    if (serviceParam && SERVICE_TO_TYPE[serviceParam]) setSelectedType(SERVICE_TO_TYPE[serviceParam]);
-  }, [serviceParam]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -216,7 +201,7 @@ export function ContactSection() {
         <Reveal className="lg:col-span-5">
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Let&apos;s talk</h2>
           <p className="mt-4 text-lg leading-relaxed text-muted">
-            Hiring for an internship or a junior role, or building something? Tell me about it and I&apos;ll get back
+            Hiring for an internship or a junior role? Tell me about it and I&apos;ll get back
             to you quickly.
           </p>
 
@@ -262,9 +247,7 @@ export function ContactSection() {
         </Reveal>
 
         <Reveal delay={0.1} className="rounded-3xl border border-line bg-surface p-6 sm:p-8 lg:col-span-7">
-          <Suspense fallback={<p className="py-12 text-center text-sm text-muted">Loading form...</p>}>
-            <ContactForm />
-          </Suspense>
+          <ContactForm />
         </Reveal>
       </div>
     </section>

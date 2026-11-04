@@ -11,8 +11,6 @@ import { Monogram } from "./Monogram";
 const NAV_LINKS = [
   { href: "/work", label: "Work" },
   { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 
