@@ -114,7 +114,7 @@ export const PROJECTS: Project[] = [
       "Web application for stock management with authentication and role-based access rights.",
     category: "Internship",
     context: "RIDA ANIS",
-    period: "07/2025",
+    period: "07/2024",
     tags: ["PHP", "MySQL", "HTML", "CSS", "JavaScript", "Bootstrap", "UML"],
   },
   {
@@ -310,10 +310,12 @@ export const TIMELINE: TimelineItem[] = [
     role: "AI & Full Stack Developer Intern",
     institution: "XAI",
     type: "experience",
+    location: "Remote",
     description:
       "Smart Real Estate Platform: a web application to visualize and manage real estate properties, integrating interactive 3D models.",
     highlights: [
       "Angular, Three.js, Java, Spring Boot, PostgreSQL, Python, Docker.",
+      "Carried out remotely, in parallel with the Norsys internship.",
     ],
   },
   {
@@ -322,6 +324,7 @@ export const TIMELINE: TimelineItem[] = [
     role: "Full Stack & Machine Learning Developer Intern (PFA)",
     institution: "Norsys",
     type: "experience",
+    location: "Hybrid",
     description:
       "Smart HR Solution: an intelligent human resources platform integrating AI to automate and optimize recruitment processes.",
     highlights: [
@@ -330,7 +333,7 @@ export const TIMELINE: TimelineItem[] = [
   },
   {
     id: "rida-anis",
-    period: "07/2025",
+    period: "07/2024",
     role: "Full Stack Developer Intern (PFA)",
     institution: "RIDA ANIS",
     type: "experience",

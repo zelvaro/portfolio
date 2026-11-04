@@ -35,20 +35,48 @@ function ContactFormInner() {
     }
   }, [serviceParam]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
+  const [error, setError] = useState<string | null>(null);
 
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-      confetti({
-        particleCount: 80,
-        spread: 60,
-        origin: { y: 0.7 },
-        colors: ["#6C5CE7", "#22D3EE", "#34D399"],
+  // Set NEXT_PUBLIC_FORMSPREE_ID to send messages through Formspree.
+  // Without it, the form opens the visitor's email client with the message pre-filled.
+  const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+
+  const celebrate = () =>
+    confetti({
+      particleCount: 80,
+      spread: 60,
+      origin: { y: 0.7 },
+      colors: ["#6C5CE7", "#22D3EE", "#34D399"],
+    });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (!formspreeId) {
+      const subject = `[Portfolio] ${selectedType} — ${name}`;
+      const body = `${message}\n\n— ${name} (${email})`;
+      window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(body)}`;
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(`https://formspree.io/f/${formspreeId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ name, email, type: selectedType, message, _replyto: email }),
       });
-    }, 1200);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setSubmitted(true);
+      celebrate();
+    } catch {
+      setError(`The message could not be sent. Please email me directly at ${PERSONAL_INFO.email}.`);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return submitted ? (
@@ -57,7 +85,7 @@ function ContactFormInner() {
         <Check className="w-8 h-8" />
       </div>
       <h3 className="font-display text-2xl font-semibold text-text-primary mb-2">
-        Message Dispatched!
+        Message Sent!
       </h3>
       <p className="text-text-secondary text-sm max-w-md mx-auto mb-6">
         Thank you for reaching out, {name}. I will get back to you as soon as possible.
@@ -147,6 +175,12 @@ function ContactFormInner() {
         />
       </div>
 
+      {error && (
+        <p role="alert" className="text-sm text-red-400">
+          {error}
+        </p>
+      )}
+
       {/* Submit Button */}
       <button
         type="submit"
@@ -156,7 +190,7 @@ function ContactFormInner() {
         {submitting ? (
           <>
             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            <span>Encrypting &amp; Dispatching...</span>
+            <span>Sending...</span>
           </>
         ) : (
           <>
