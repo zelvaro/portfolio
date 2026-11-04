@@ -1,102 +1,68 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Bot, BrainCircuit, Check, Layers, Server, Smartphone, Zap } from "lucide-react";
+import { Check, Layers } from "lucide-react";
 import { SERVICES } from "@/lib/data";
-import { SpotlightCard } from "@/components/ui/SpotlightCard";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Reveal } from "@/components/ui/Reveal";
+import { SERVICE_ICONS } from "@/components/home/ServicesGrid";
 
-const ICON_MAP: Record<string, any> = {
-  Bot,
-  Layers,
-  Server,
-  Smartphone,
-  Zap,
-  BrainCircuit,
-};
+export const metadata: Metadata = { title: "Services — Sabir Essaad" };
 
 export default function ServicesPage() {
   return (
-    <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen">
-      <SectionHeader
-        eyebrow="// ENGINEERING OFFERINGS"
-        title="Web, Mobile & AI Development"
-        description="What I can build for you, based on the stacks I have used in internships and academic projects."
+    <>
+      <PageHeader
+        title="Web, mobile and AI development"
+        intro="What I can build, based on the stacks I have used in internships and academic projects."
       />
-
-      <div className="space-y-12">
-        {SERVICES.map((service, idx) => {
-          const IconComponent = ICON_MAP[service.iconName] || Bot;
+      <div className="container-page pb-24">
+        {SERVICES.map((service) => {
+          const Icon = SERVICE_ICONS[service.iconName] ?? Layers;
           return (
-            <SpotlightCard key={service.id} className="p-8 sm:p-12 bg-bg-surface border-border-hairline">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                {/* Left overview */}
-                <div className="lg:col-span-7">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-bg-surface-2 border border-border-hairline flex items-center justify-center">
-                      <IconComponent className="w-6 h-6 text-accent-secondary" />
-                    </div>
-                    <div>
-                      <span className="font-mono text-xs font-semibold uppercase tracking-wider text-accent-secondary block">
-                        // {service.eyebrow}
-                      </span>
-                      <h2 className="font-display text-2xl sm:text-3xl font-semibold text-text-primary">
-                        {service.title}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <p className="text-accent-secondary font-medium text-lg mb-4">
-                    "{service.outcome}"
-                  </p>
-
-                  <p className="text-text-secondary text-base leading-relaxed mb-6 font-normal">
-                    {service.description}
-                  </p>
-
-                  {/* Features */}
-                  <div className="space-y-2">
-                    <span className="font-mono text-xs text-text-muted uppercase tracking-wider block mb-2">
-                      Key Technical Capabilities:
-                    </span>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {service.features.map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-start gap-2 text-xs text-text-secondary">
-                          <Check className="w-4 h-4 text-accent-success shrink-0 mt-0.5" />
-                          <span>{feat}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right deliverables & CTA */}
-                <div className="lg:col-span-5 p-6 rounded-2xl bg-bg-base border border-border-hairline flex flex-col justify-between h-full">
+            <article
+              key={service.id}
+              id={service.id}
+              className="grid scroll-mt-24 gap-8 border-t border-line py-12 lg:grid-cols-12 lg:gap-12"
+            >
+              <Reveal className="lg:col-span-5">
+                <Icon className="h-7 w-7 text-accent" aria-hidden />
+                <h2 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">{service.title}</h2>
+                <p className="mt-3 text-lg leading-relaxed text-muted">{service.outcome}</p>
+              </Reveal>
+              <Reveal delay={0.08} className="lg:col-span-7">
+                <p className="leading-relaxed text-muted">{service.description}</p>
+                <div className="mt-6 grid gap-8 sm:grid-cols-2">
                   <div>
-                    <span className="font-mono text-xs text-text-muted uppercase tracking-wider block mb-3">
-                      Expected Deliverables:
-                    </span>
-                    <ul className="space-y-2 mb-6">
-                      {service.deliverables.map((del, dIdx) => (
-                        <li key={dIdx} className="flex items-center gap-2 text-xs font-mono text-text-primary">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent-secondary" />
-                          <span>{del}</span>
+                    <h3 className="text-sm font-semibold">Capabilities</h3>
+                    <ul className="mt-3 space-y-2">
+                      {service.features.map((feature) => (
+                        <li key={feature} className="flex gap-2 text-sm text-muted">
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
+                          <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-
-                  <Link
-                    href={`/contact?service=${service.id}`}
-                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-xl bg-accent-gradient text-white text-sm font-semibold shadow-lg hover:shadow-accent-primary/25 transition-all"
-                  >
-                    <span>Inquire for {service.title}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+                  <div>
+                    <h3 className="text-sm font-semibold">Deliverables</h3>
+                    <ul className="mt-3 space-y-2">
+                      {service.deliverables.map((deliverable) => (
+                        <li key={deliverable} className="flex gap-2 text-sm text-muted">
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
+                          <span>{deliverable}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </SpotlightCard>
+                <Link href={`/contact?service=${service.id}`} className="btn-secondary mt-8">
+                  Discuss a project
+                </Link>
+              </Reveal>
+            </article>
           );
         })}
       </div>
-    </div>
+    </>
   );
 }

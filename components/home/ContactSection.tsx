@@ -1,61 +1,58 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Check, Copy, FileText, Github, Linkedin, Mail, Send } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { PERSONAL_INFO } from "@/lib/data";
-import { SpotlightCard } from "../ui/SpotlightCard";
+import { Reveal } from "../ui/Reveal";
 
 const PROJECT_TYPES = [
-  "Full Stack Web App",
-  "Mobile App",
-  "AI / ML Integration",
-  "DevOps & Deployment",
-  "Internship / Job Opportunity",
+  "Internship or job",
+  "Full stack web app",
+  "Mobile app",
+  "AI integration",
+  "DevOps & deployment",
 ];
 
-function ContactFormInner() {
+const SERVICE_TO_TYPE: Record<string, string> = {
+  "full-stack": "Full stack web app",
+  mobile: "Mobile app",
+  "ai-ml": "AI integration",
+  devops: "DevOps & deployment",
+};
+
+const inputClass =
+  "w-full rounded-xl border border-line bg-bg px-4 py-3 text-base text-ink placeholder:text-subtle transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20";
+
+function ContactForm() {
   const searchParams = useSearchParams();
   const serviceParam = searchParams.get("service");
 
-  const [selectedType, setSelectedType] = useState<string>(PROJECT_TYPES[0]);
+  const [selectedType, setSelectedType] = useState(PROJECT_TYPES[0]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    if (serviceParam) {
-      if (serviceParam === "full-stack") setSelectedType("Full Stack Web App");
-      if (serviceParam === "mobile") setSelectedType("Mobile App");
-      if (serviceParam === "ai-ml") setSelectedType("AI / ML Integration");
-      if (serviceParam === "devops") setSelectedType("DevOps & Deployment");
-    }
-  }, [serviceParam]);
-
   const [error, setError] = useState<string | null>(null);
 
   // Set NEXT_PUBLIC_FORMSPREE_ID to send messages through Formspree.
   // Without it, the form opens the visitor's email client with the message pre-filled.
   const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
 
-  const celebrate = () =>
-    confetti({
-      particleCount: 80,
-      spread: 60,
-      origin: { y: 0.7 },
-      colors: ["#6C5CE7", "#22D3EE", "#34D399"],
-    });
+  useEffect(() => {
+    if (serviceParam && SERVICE_TO_TYPE[serviceParam]) setSelectedType(SERVICE_TO_TYPE[serviceParam]);
+  }, [serviceParam]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
     if (!formspreeId) {
-      const subject = `[Portfolio] ${selectedType} — ${name}`;
-      const body = `${message}\n\n— ${name} (${email})`;
+      const subject = `[Portfolio] ${selectedType}, from ${name}`;
+      const body = `${message}\n\n${name} (${email})`;
       window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
         subject
       )}&body=${encodeURIComponent(body)}`;
@@ -71,251 +68,204 @@ function ContactFormInner() {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setSubmitted(true);
-      celebrate();
+      confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 }, colors: ["#4F3FD6", "#988EF7", "#D69620"] });
     } catch {
-      setError(`The message could not be sent. Please email me directly at ${PERSONAL_INFO.email}.`);
+      setError(`The message could not be sent. Email me directly at ${PERSONAL_INFO.email}.`);
     } finally {
       setSubmitting(false);
     }
   };
 
-  return submitted ? (
-    <div className="py-12 text-center flex flex-col items-center justify-center">
-      <div className="w-16 h-16 rounded-full bg-accent-success/20 border border-accent-success/40 flex items-center justify-center mb-4 text-accent-success">
-        <Check className="w-8 h-8" />
-      </div>
-      <h3 className="font-display text-2xl font-semibold text-text-primary mb-2">
-        Message Sent!
-      </h3>
-      <p className="text-text-secondary text-sm max-w-md mx-auto mb-6">
-        Thank you for reaching out, {name}. I will get back to you as soon as possible.
-      </p>
-      <button
-        onClick={() => {
-          setSubmitted(false);
-          setName("");
-          setEmail("");
-          setMessage("");
-        }}
-        className="px-5 py-2.5 rounded-xl bg-bg-surface-2 border border-border-hairline text-text-primary text-xs font-mono hover:bg-bg-surface-2/80 transition-colors"
-      >
-        Send Another Inquiry
-      </button>
-    </div>
-  ) : (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Project Type Selector Pills */}
-      <div>
-        <label className="block text-xs font-mono text-text-muted uppercase tracking-wider mb-3">
-          Select Project Type
-        </label>
-        <div className="flex flex-wrap gap-2">
-          {PROJECT_TYPES.map((type) => {
-            const isSelected = selectedType === type;
-            return (
-              <button
-                type="button"
-                key={type}
-                onClick={() => setSelectedType(type)}
-                className={`px-3.5 py-2 rounded-lg font-mono text-xs transition-all duration-200 ${
-                  isSelected
-                    ? "bg-accent-gradient text-white shadow-md shadow-accent-primary/20 font-semibold"
-                    : "bg-bg-surface-2 border border-border-hairline text-text-secondary hover:text-text-primary"
-                }`}
-              >
-                {type}
-              </button>
-            );
-          })}
-        </div>
-      </div>
+  const reset = () => {
+    setSubmitted(false);
+    setName("");
+    setEmail("");
+    setMessage("");
+  };
 
-      {/* Inputs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-xs font-mono text-text-muted uppercase tracking-wider mb-2">
-            Your Name
-          </label>
-          <input
-            type="text"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="e.g. Alex Vance"
-            className="w-full px-4 py-3 rounded-xl bg-bg-base border border-border-hairline text-text-primary placeholder:text-text-muted text-sm focus:outline-none focus:border-accent-primary transition-colors"
-          />
-        </div>
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      {submitted ? (
+        <motion.div
+          key="sent"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          className="flex flex-col items-center py-12 text-center"
+          role="status"
+        >
+          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft text-accent">
+            <Check className="h-7 w-7" aria-hidden />
+          </span>
+          <h3 className="mt-5 text-2xl font-semibold tracking-tight">Message sent</h3>
+          <p className="mt-2 max-w-sm text-muted">Thanks, {name}. I&apos;ll reply to {email} as soon as I can.</p>
+          <button type="button" onClick={reset} className="btn-secondary mt-6">
+            Write another message
+          </button>
+        </motion.div>
+      ) : (
+        <motion.form
+          key="form"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onSubmit={handleSubmit}
+          className="space-y-6"
+        >
+          <fieldset>
+            <legend className="mb-3 text-sm font-medium">What is it about?</legend>
+            <div className="flex flex-wrap gap-2">
+              {PROJECT_TYPES.map((type) => {
+                const active = selectedType === type;
+                return (
+                  <button
+                    type="button"
+                    key={type}
+                    aria-pressed={active}
+                    onClick={() => setSelectedType(type)}
+                    className={`rounded-full border px-3.5 py-2 text-sm font-medium transition-colors ${
+                      active
+                        ? "border-accent bg-accent text-on-accent"
+                        : "border-line bg-bg text-muted hover:border-accent/60 hover:text-ink"
+                    }`}
+                  >
+                    {type}
+                  </button>
+                );
+              })}
+            </div>
+          </fieldset>
 
-        <div>
-          <label className="block text-xs font-mono text-text-muted uppercase tracking-wider mb-2">
-            Email Address
-          </label>
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="alex@company.com"
-            className="w-full px-4 py-3 rounded-xl bg-bg-base border border-border-hairline text-text-primary placeholder:text-text-muted text-sm focus:outline-none focus:border-accent-primary transition-colors"
-          />
-        </div>
-      </div>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label htmlFor="contact-name" className="mb-2 block text-sm font-medium">
+                Your name
+              </label>
+              <input
+                id="contact-name"
+                type="text"
+                required
+                autoComplete="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={inputClass}
+              />
+            </div>
+            <div>
+              <label htmlFor="contact-email" className="mb-2 block text-sm font-medium">
+                Your email
+              </label>
+              <input
+                id="contact-email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={inputClass}
+              />
+            </div>
+          </div>
 
-      <div>
-        <label className="block text-xs font-mono text-text-muted uppercase tracking-wider mb-2">
-          Project Details &amp; Scope
-        </label>
-        <textarea
-          required
-          rows={4}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Briefly describe your goals, expected timeline, and current tools..."
-          className="w-full px-4 py-3 rounded-xl bg-bg-base border border-border-hairline text-text-primary placeholder:text-text-muted text-sm focus:outline-none focus:border-accent-primary transition-colors resize-none"
-        />
-      </div>
+          <div>
+            <label htmlFor="contact-message" className="mb-2 block text-sm font-medium">
+              Message
+            </label>
+            <textarea
+              id="contact-message"
+              required
+              rows={5}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="The role or project, the timeline, and anything I should know."
+              className={`${inputClass} resize-none`}
+            />
+          </div>
 
-      {error && (
-        <p role="alert" className="text-sm text-red-400">
-          {error}
-        </p>
+          {error && (
+            <p role="alert" className="text-sm font-medium text-red-600 dark:text-red-400">
+              {error}
+            </p>
+          )}
+
+          <button type="submit" disabled={submitting} className="btn-primary w-full py-3.5 text-base disabled:opacity-60">
+            {submitting ? "Sending..." : "Send message"}
+          </button>
+        </motion.form>
       )}
-
-      {/* Submit Button */}
-      <button
-        type="submit"
-        disabled={submitting}
-        className="w-full py-4 rounded-xl bg-accent-gradient text-white font-medium text-base shadow-xl shadow-accent-primary/20 hover:shadow-accent-primary/35 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
-      >
-        {submitting ? (
-          <>
-            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            <span>Sending...</span>
-          </>
-        ) : (
-          <>
-            <span>Send Project Brief</span>
-            <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </>
-        )}
-      </button>
-    </form>
+    </AnimatePresence>
   );
 }
 
 export function ContactSection() {
   const [copied, setCopied] = useState(false);
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(PERSONAL_INFO.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${PERSONAL_INFO.email}`;
+    }
   };
 
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-border-hairline/60">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        {/* Left Column */}
-        <div className="lg:col-span-5 flex flex-col justify-between h-full">
-          <div>
-            <div className="inline-flex items-center gap-2 mb-3">
-              <span className="h-px w-4 bg-accent-primary/60" />
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-accent-secondary">
-                // INITIATE CONTACT
-              </span>
-            </div>
+    <section id="contact" className="scroll-mt-20 border-t border-line py-20 sm:py-24">
+      <div className="container-page grid items-start gap-12 lg:grid-cols-12">
+        <Reveal className="lg:col-span-5">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">Let&apos;s talk</h2>
+          <p className="mt-4 text-lg leading-relaxed text-muted">
+            Hiring for an internship or a junior role, or building something? Tell me about it and I&apos;ll get back
+            to you quickly.
+          </p>
 
-            <h2 className="font-display text-3xl sm:text-5xl font-semibold tracking-tight text-text-primary mb-6 leading-tight">
-              Have a project or an opportunity?
-            </h2>
-
-            <p className="text-text-secondary text-base sm:text-lg leading-relaxed mb-8">
-              Tell me what you&apos;re building or hiring for — I&apos;ll get back to you quickly.
-            </p>
-
-            <div className="space-y-4 mb-8">
-              <div className="p-4 rounded-xl bg-bg-surface border border-border-hairline flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-bg-surface-2 flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-accent-secondary" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-text-muted">Direct Email</div>
-                    <div className="font-mono text-sm text-text-primary font-medium">{PERSONAL_INFO.email}</div>
-                  </div>
-                </div>
-
-                <button
-                  onClick={copyEmail}
-                  className="px-3 py-1.5 rounded-lg bg-bg-surface-2 border border-border-hairline text-xs font-mono text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1.5"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-accent-success" />
-                      <span className="text-accent-success">Copied!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5" />
-                      <span>Copy</span>
-                    </>
-                  )}
-                </button>
+          <dl className="mt-10 divide-y divide-line border-y border-line">
+            <div className="flex items-center justify-between gap-4 py-4">
+              <div className="min-w-0">
+                <dt className="text-sm text-subtle">Email</dt>
+                <dd className="truncate font-semibold">
+                  <a href={`mailto:${PERSONAL_INFO.email}`} className="hover:text-accent">
+                    {PERSONAL_INFO.email}
+                  </a>
+                </dd>
               </div>
-
-              <a
-                href={PERSONAL_INFO.cvUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 rounded-xl bg-bg-surface border border-border-hairline flex items-center justify-between hover:border-accent-primary/40 transition-colors group"
+              <button
+                type="button"
+                onClick={copyEmail}
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:text-ink"
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-bg-surface-2 flex items-center justify-center">
-                    <FileText className="w-5 h-5 text-accent-primary" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-text-muted">Curriculum Vitae</div>
-                    <div className="font-mono text-sm text-text-primary font-medium">Sabir_Essaad_CV.pdf</div>
-                  </div>
-                </div>
-                <span className="text-xs font-mono text-accent-secondary group-hover:underline">
-                  Download ↓
-                </span>
-              </a>
+                {copied ? <Check className="h-4 w-4 text-accent" aria-hidden /> : <Copy className="h-4 w-4" aria-hidden />}
+                <span aria-live="polite">{copied ? "Copied" : "Copy"}</span>
+              </button>
             </div>
-
-            <div className="flex items-center gap-3">
-              <a
-                href={PERSONAL_INFO.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-bg-surface border border-border-hairline text-text-secondary hover:text-text-primary hover:border-accent-primary/40 transition-colors text-xs font-mono"
-              >
-                <Github className="w-4 h-4" />
-                <span>GitHub Profile</span>
-              </a>
-
-              <a
-                href={PERSONAL_INFO.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-bg-surface border border-border-hairline text-text-secondary hover:text-text-primary hover:border-accent-primary/40 transition-colors text-xs font-mono"
-              >
-                <Linkedin className="w-4 h-4" />
-                <span>LinkedIn</span>
-              </a>
+            <div className="py-4">
+              <dt className="text-sm text-subtle">Resume</dt>
+              <dd>
+                <a href={PERSONAL_INFO.cvUrl} target="_blank" rel="noopener noreferrer" className="link">
+                  Download CV (PDF)
+                </a>
+              </dd>
             </div>
-          </div>
-        </div>
+            <div className="py-4">
+              <dt className="text-sm text-subtle">Elsewhere</dt>
+              <dd className="flex gap-6">
+                <a href={PERSONAL_INFO.github} target="_blank" rel="noopener noreferrer" className="link">
+                  GitHub
+                </a>
+                <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="link">
+                  LinkedIn
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </Reveal>
 
-        {/* Right Column: Form with Suspense Boundary */}
-        <div className="lg:col-span-7">
-          <SpotlightCard className="p-6 sm:p-10 bg-bg-surface border-border-hairline">
-            <Suspense fallback={<div className="p-8 text-center text-xs font-mono text-text-muted">Loading form...</div>}>
-              <ContactFormInner />
-            </Suspense>
-          </SpotlightCard>
-        </div>
+        <Reveal delay={0.1} className="rounded-3xl border border-line bg-surface p-6 sm:p-8 lg:col-span-7">
+          <Suspense fallback={<p className="py-12 text-center text-sm text-muted">Loading form...</p>}>
+            <ContactForm />
+          </Suspense>
+        </Reveal>
       </div>
     </section>
   );

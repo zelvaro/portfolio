@@ -1,122 +1,105 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { BLOG_POSTS, PERSONAL_INFO } from "@/lib/data";
 
 interface BlogSlugProps {
-  params: {
-    slug: string;
-  };
+  params: { slug: string };
 }
 
 export function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({
-    slug: post.slug,
-  }));
+  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+}
+
+export function generateMetadata({ params }: BlogSlugProps): Metadata {
+  const post = BLOG_POSTS.find((p) => p.slug === params.slug);
+  return post ? { title: `${post.title} — ${PERSONAL_INFO.name}`, description: post.summary } : {};
+}
+
+// Renders **bold** segments inside a line of text
+function renderInline(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <strong key={i} className="font-semibold text-ink">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      part
+    )
+  );
+}
+
+function renderBlock(block: string, index: number) {
+  if (block.startsWith("### ")) {
+    return (
+      <h3 key={index} className="mt-8 text-xl font-semibold tracking-tight text-ink">
+        {block.slice(4)}
+      </h3>
+    );
+  }
+  if (block.startsWith("## ")) {
+    return (
+      <h2 key={index} className="mt-10 text-2xl font-semibold tracking-tight text-ink">
+        {block.slice(3)}
+      </h2>
+    );
+  }
+  if (block.startsWith("# ")) return null; // The article title is already shown above
+  if (block.startsWith("```")) {
+    const code = block.split("\n").slice(1, -1).join("\n");
+    return (
+      <pre key={index} className="overflow-x-auto rounded-2xl border border-line bg-surface p-4 text-sm">
+        <code>{code}</code>
+      </pre>
+    );
+  }
+  const lines = block.split("\n");
+  if (lines.every((l) => /^\d+\.\s/.test(l))) {
+    return (
+      <ol key={index} className="list-decimal space-y-3 pl-6 marker:text-subtle">
+        {lines.map((l, i) => (
+          <li key={i}>{renderInline(l.replace(/^\d+\.\s/, ""))}</li>
+        ))}
+      </ol>
+    );
+  }
+  if (lines.every((l) => /^[-*]\s/.test(l))) {
+    return (
+      <ul key={index} className="list-disc space-y-3 pl-6 marker:text-subtle">
+        {lines.map((l, i) => (
+          <li key={i}>{renderInline(l.replace(/^[-*]\s/, ""))}</li>
+        ))}
+      </ul>
+    );
+  }
+  return <p key={index}>{renderInline(block)}</p>;
 }
 
 export default function BlogPostPage({ params }: BlogSlugProps) {
   const post = BLOG_POSTS.find((p) => p.slug === params.slug);
-
-  if (!post) {
-    notFound();
-  }
+  if (!post) notFound();
 
   return (
-    <article className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto min-h-screen">
-      {/* Back Link */}
-      <Link
-        href="/blog"
-        className="inline-flex items-center gap-2 text-xs font-mono text-text-muted hover:text-accent-secondary mb-8 transition-colors"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        <span>Back to all articles</span>
+    <article className="container-page max-w-3xl pb-24 pt-32 sm:pt-40">
+      <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-muted hover:text-ink">
+        <ArrowLeft className="h-4 w-4" aria-hidden />
+        All articles
       </Link>
 
-      {/* Article Header */}
-      <div className="mb-10 pb-8 border-b border-border-hairline">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="font-mono text-xs uppercase tracking-wider px-3 py-1 rounded bg-bg-surface-2 border border-border-hairline text-accent-secondary">
-            {post.category}
-          </span>
-          <span className="text-text-muted text-xs">•</span>
-          <div className="flex items-center gap-1.5 text-xs text-text-muted font-mono">
-            <Clock className="w-3.5 h-3.5 text-accent-secondary" />
-            <span>{post.readTime}</span>
-          </div>
-          <span className="text-text-muted text-xs">•</span>
-          <div className="flex items-center gap-1.5 text-xs text-text-muted font-mono">
-            <Calendar className="w-3.5 h-3.5" />
-            <span>{post.date}</span>
-          </div>
-        </div>
-
-        <h1 className="font-display text-3xl sm:text-5xl font-semibold text-text-primary tracking-tight leading-tight mb-4">
-          {post.title}
-        </h1>
-
-        <p className="text-lg text-text-secondary leading-relaxed">
-          {post.summary}
+      <header className="mt-8 border-b border-line pb-8">
+        <p className="text-sm text-subtle">
+          {post.category}, {post.date}, {post.readTime}
         </p>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">{post.title}</h1>
+        <p className="mt-4 text-lg leading-relaxed text-muted">{post.summary}</p>
+        <p className="mt-6 text-sm text-muted">
+          By <span className="font-semibold text-ink">{PERSONAL_INFO.name}</span>
+        </p>
+      </header>
 
-        {/* Author info bar */}
-        <div className="mt-6 pt-6 border-t border-border-hairline/50 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-accent-gradient p-px">
-              <div className="w-full h-full rounded-full bg-bg-surface flex items-center justify-center font-mono font-bold text-xs text-accent-secondary">
-                SE
-              </div>
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-text-primary">{PERSONAL_INFO.name}</div>
-              <div className="text-xs text-text-muted font-mono">{PERSONAL_INFO.title}</div>
-            </div>
-          </div>
-
-          <Link
-            href="/contact"
-            className="text-xs font-mono text-accent-secondary hover:underline"
-          >
-            Inquire project →
-          </Link>
-        </div>
-      </div>
-
-      {/* Article Body */}
-      <div className="prose prose-invert max-w-none space-y-6 text-text-secondary text-base leading-relaxed font-normal">
-        {post.content.split("\n\n").map((paragraph, index) => {
-          if (paragraph.startsWith("# ")) {
-            return (
-              <h1 key={index} className="font-display text-3xl font-semibold text-text-primary mt-8 mb-4">
-                {paragraph.replace("# ", "")}
-              </h1>
-            );
-          }
-          if (paragraph.startsWith("## ")) {
-            return (
-              <h2 key={index} className="font-display text-2xl font-semibold text-text-primary mt-8 mb-4">
-                {paragraph.replace("## ", "")}
-              </h2>
-            );
-          }
-          if (paragraph.startsWith("### ")) {
-            return (
-              <h3 key={index} className="font-display text-xl font-semibold text-text-primary mt-6 mb-3">
-                {paragraph.replace("### ", "")}
-              </h3>
-            );
-          }
-          if (paragraph.startsWith("```")) {
-            const lines = paragraph.split("\n");
-            const code = lines.slice(1, -1).join("\n");
-            return (
-              <pre key={index} className="p-4 rounded-xl bg-bg-surface border border-border-hairline font-mono text-xs overflow-x-auto text-accent-secondary my-6">
-                <code>{code}</code>
-              </pre>
-            );
-          }
-          return <p key={index}>{paragraph}</p>;
-        })}
+      <div className="mt-10 space-y-6 text-lg leading-relaxed text-muted">
+        {post.content.trim().split("\n\n").map(renderBlock)}
       </div>
     </article>
   );

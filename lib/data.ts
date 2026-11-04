@@ -22,7 +22,7 @@ export interface Service {
 
 export interface TechItem {
   name: string;
-  category: "Frontend & Mobile" | "Backend & Data" | "AI/ML & DevOps";
+  category: "Frontend & Mobile" | "Backend & Data" | "AI & DevOps";
   description: string;
 }
 
@@ -53,9 +53,9 @@ export const PERSONAL_INFO = {
   status: "Open to opportunities",
   location: "Marrakech, Morocco",
   tagline: "Computer Science & Networks engineering student. Full stack developer.",
-  heroHeadline: "Building AI products that replace manual work.",
+  heroHeadline: "Full stack developer building web, mobile and AI-powered applications.",
   heroSubtext:
-    "Computer Science & Networks engineering student at EMSI and full stack developer. I build web, mobile, and AI-powered applications — from database to deployment.",
+    "Computer Science & Networks engineering student at EMSI. I've built real applications during internships at XAI, Norsys and RIDA ANIS, and I'm now applying generative and agentic AI in an enterprise project at Fusion AI.",
   email: "sabiressaad24@gmail.com",
   github: "https://github.com/sabiressaad",
   linkedin: "https://linkedin.com/in/sabiressaad/",
@@ -251,29 +251,22 @@ export const SERVICES: Service[] = [
 
 export const TECH_STACK: TechItem[] = [
   // Frontend & Mobile
-  { name: "React", category: "Frontend & Mobile", description: "Used on EmotionLearn, the Smart HR Solution, and the clinic management platform." },
-  { name: "Angular", category: "Frontend & Mobile", description: "Used on the Smart Real Estate Platform and the banking management system." },
-  { name: "React Native", category: "Frontend & Mobile", description: "Cross-platform mobile development, used on MediCare." },
-  { name: "Android (Java)", category: "Frontend & Mobile", description: "Native Android development with Android Studio, used on MobiCode." },
-  { name: "Three.js", category: "Frontend & Mobile", description: "Interactive 3D models in the browser." },
-  { name: "Tailwind CSS / Bootstrap", category: "Frontend & Mobile", description: "HTML, CSS, JavaScript, and responsive UI frameworks." },
+  { name: "React", category: "Frontend & Mobile", description: "EmotionLearn, Smart HR Solution, clinic management platform." },
+  { name: "Angular", category: "Frontend & Mobile", description: "Smart Real Estate Platform, banking management system." },
+  { name: "React Native", category: "Frontend & Mobile", description: "Cross-platform mobile app for MediCare." },
+  { name: "Tailwind CSS", category: "Frontend & Mobile", description: "Responsive interfaces, including this portfolio." },
 
   // Backend & Data
-  { name: "Java / Spring Boot", category: "Backend & Data", description: "REST APIs and JEE back ends with JWT authentication." },
-  { name: "Python / Django / FastAPI", category: "Backend & Data", description: "Web back ends and AI services, including WebSockets." },
-  { name: "PHP / Laravel", category: "Backend & Data", description: "Web applications and REST APIs." },
-  { name: "C# / .NET", category: "Backend & Data", description: "Also programming in C and C++." },
-  { name: "PostgreSQL / MySQL", category: "Backend & Data", description: "Relational databases, plus Oracle and SQL Server." },
-  { name: "MongoDB", category: "Backend & Data", description: "Document database and the MERN stack." },
-  { name: "Hadoop / Power BI", category: "Backend & Data", description: "Big data processing and data visualization." },
+  { name: "Java & Spring Boot", category: "Backend & Data", description: "REST APIs with JWT authentication." },
+  { name: "Python, Django & FastAPI", category: "Backend & Data", description: "Web back ends and AI services with WebSockets." },
+  { name: "PostgreSQL & MySQL", category: "Backend & Data", description: "Relational data modeling." },
+  { name: "MongoDB", category: "Backend & Data", description: "Document storage for EmotionLearn." },
 
-  // AI/ML & DevOps
-  { name: "TensorFlow", category: "AI/ML & DevOps", description: "Deep learning models." },
-  { name: "OpenCV", category: "AI/ML & DevOps", description: "Computer vision." },
-  { name: "NLP / Transformers", category: "AI/ML & DevOps", description: "NLP models and the OpenAI API, used on MobiCode." },
-  { name: "Generative & Agentic AI", category: "AI/ML & DevOps", description: "GenAIOT training program and enterprise project at Fusion AI." },
-  { name: "Docker / Kubernetes", category: "AI/ML & DevOps", description: "Containerization and orchestration." },
-  { name: "Git / CI/CD", category: "AI/ML & DevOps", description: "Git, GitHub, and continuous integration and delivery pipelines." },
+  // AI & DevOps
+  { name: "Generative & agentic AI", category: "AI & DevOps", description: "GenAIOT program and the Fusion AI enterprise project." },
+  { name: "NLP & Transformers", category: "AI & DevOps", description: "Code generation with the OpenAI API on MobiCode." },
+  { name: "Docker", category: "AI & DevOps", description: "Containerized apps across internship projects." },
+  { name: "Git & CI/CD", category: "AI & DevOps", description: "GitHub workflows and delivery pipelines." },
 ];
 
 export const TIMELINE: TimelineItem[] = [
