@@ -60,14 +60,14 @@ export function Hero({ avatarSrc }: { avatarSrc?: string | null }) {
                 className="relative h-24 w-24 rounded-full border-2 border-accent/60 object-cover sm:h-28 sm:w-28"
               />
             ) : (
-              <span className="relative flex h-24 w-24 items-center justify-center rounded-full border border-accent/40 bg-gradient-to-br from-[#2B1052] to-[#6D28D9] font-display text-3xl font-bold sm:h-28 sm:w-28">
+              <span className="relative flex h-24 w-24 items-center justify-center rounded-full border border-accent/40 bg-gradient-to-br from-[#0A2858] to-[#1466B8] font-display text-3xl font-bold sm:h-28 sm:w-28">
                 SE
               </span>
             )}
           </div>
           <div>
             <p className="text-sm text-muted">
-              Hello! I&apos;m <span className="font-semibold text-accent">{PERSONAL_INFO.name}</span>
+              Hello! I&apos;m <span className="font-semibold text-[#ED1F9E]">{PERSONAL_INFO.name}</span>
             </p>
             <h1 className="mt-2 max-w-md text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
               Building web, mobile and <span className="text-gradient">AI products.</span>

@@ -17,7 +17,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "radial-gradient(circle at 70% 40%, #3A1670 0%, #11071F 60%)",
+          background: "radial-gradient(circle at 70% 40%, #0F3570 0%, #04183B 60%)",
           color: "#fff",
           fontFamily: "sans-serif",
         }}
@@ -30,7 +30,7 @@ export default function OpengraphImage() {
             width: 110,
             height: 110,
             borderRadius: 999,
-            background: "linear-gradient(135deg, #6D28D9, #B57BFF)",
+            background: "linear-gradient(135deg, #1466B8, #ED1F9E)",
             fontSize: 44,
             fontWeight: 700,
           }}
@@ -38,7 +38,7 @@ export default function OpengraphImage() {
           SE
         </div>
         <div style={{ marginTop: 40, fontSize: 72, fontWeight: 700 }}>{PERSONAL_INFO.name}</div>
-        <div style={{ marginTop: 16, fontSize: 36, color: "#C4BADE", maxWidth: 900 }}>
+        <div style={{ marginTop: 16, fontSize: 36, color: "#B4C4DE", maxWidth: 900 }}>
           {PERSONAL_INFO.heroHeadline}
         </div>
       </div>

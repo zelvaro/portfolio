@@ -14,7 +14,7 @@ function ProjectVisual({ title, tags, image }: { title: string; tags: string[]; 
   return (
     <div className="relative">
       <div aria-hidden className="halo absolute -inset-10" />
-      <div className="relative overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-[#1C0B36] to-[#3A1670] shadow-2xl shadow-accent-deep/30">
+      <div className="relative overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-[#061E48] to-[#0F3570] shadow-2xl shadow-accent-deep/30">
         <div className="flex items-center gap-1.5 border-b border-line px-4 py-3" aria-hidden>
           <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
@@ -58,7 +58,7 @@ export function FeaturedProjects() {
                 flip ? "lg:col-start-1 lg:text-left" : "lg:col-start-7 lg:text-right"
               }`}
             >
-              <p className="text-sm font-semibold text-accent">Featured project</p>
+              <p className="text-sm font-semibold text-[#ED1F9E]">Featured project</p>
               <h3 className="mt-1 text-2xl font-semibold sm:text-3xl">{project.title}</h3>
               <p className="mt-1 text-sm text-subtle">
                 {project.context}

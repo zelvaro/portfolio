@@ -83,7 +83,7 @@ function Ring({ logos, radius, duration, reverse, reduce }: { logos: Logo[]; rad
           >
             <motion.span
               title={logo.name}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-[#26124A] shadow-[0_0_18px_rgb(124_58_237/0.45)] sm:h-12 sm:w-12"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-line bg-[#0B2A5C] shadow-[0_0_18px_rgb(32_146_229/0.45)] sm:h-12 sm:w-12"
               animate={reduce ? undefined : { rotate: -turn }}
               transition={{ duration, repeat: Infinity, ease: "linear" }}
             >
@@ -124,7 +124,7 @@ export function StackOrbit() {
           animate={reduce ? undefined : { scale: [1, 1.06, 1] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <Monogram className="h-20 w-20 text-xl shadow-[0_0_70px_rgb(124_58_237/0.9)] sm:h-28 sm:w-28 sm:text-3xl" />
+          <Monogram className="h-20 w-20 text-xl shadow-[0_0_70px_rgb(32_146_229/0.9)] sm:h-28 sm:w-28 sm:text-3xl" />
         </motion.div>
       </div>
 
@@ -137,7 +137,7 @@ export function StackOrbit() {
                 const icon = STACK_ICONS[tech.name];
                 return (
                   <li key={tech.name} className="group flex items-start gap-3">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-[#26124A] transition-all group-hover:border-accent group-hover:shadow-[0_0_16px_rgb(124_58_237/0.6)]">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-[#0B2A5C] transition-all group-hover:border-accent group-hover:shadow-[0_0_16px_rgb(32_146_229/0.6)]">
                       {icon && "path" in icon ? (
                         <LogoImg logo={icon as Logo} className="h-5 w-5" />
                       ) : icon ? (

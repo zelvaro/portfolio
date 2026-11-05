@@ -2,17 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Deep violet night theme */
+/* Galactic blue base, true blue accents, a touch of magenta pink */
 :root {
-  --bg: 17 7 31;
-  --surface: 29 13 52;
+  --bg: 4 24 59;            /* galactic blue #04183B */
+  --surface: 10 37 82;
   --ink: 255 255 255;
-  --muted: 196 186 222;
-  --subtle: 150 136 184;
-  --line: 62 36 106;
-  --accent: 171 116 255;
-  --accent-soft: 46 21 86;
-  --accent-deep: 113 39 186;
+  --muted: 180 196 222;
+  --subtle: 127 147 184;
+  --line: 27 59 115;
+  --accent: 32 146 229;     /* true blue #2092E5 */
+  --accent-soft: 14 44 92;
+  --accent-deep: 20 102 184;
+  --pink: 237 31 158;       /* magenta pink #ED1F9E */
   --on-accent: 255 255 255;
   --signal: 74 222 128;
   color-scheme: dark;
@@ -69,7 +70,7 @@ h3 {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200;
   }
   .btn-primary {
-    @apply btn bg-gradient-to-r from-[#6D28D9] to-[#9B4DFF] text-white shadow-lg shadow-[#7127BA]/40 hover:brightness-110;
+    @apply btn bg-gradient-to-r from-[#1466B8] to-[#2092E5] text-white shadow-lg shadow-[#2092E5]/30 hover:brightness-110;
   }
   .btn-secondary {
     @apply btn border border-line bg-surface/60 text-ink backdrop-blur hover:border-accent/70;
@@ -77,18 +78,18 @@ h3 {
   .link {
     @apply font-semibold text-accent underline-offset-4 hover:underline;
   }
-  /* Violet gradient card from the design */
+  /* Deep blue gradient card */
   .card-glow {
-    @apply relative overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-[#1C0B36] via-[#24104A] to-[#3A1670];
+    @apply relative overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-[#061E48] via-[#0A2858] to-[#0F3570];
   }
   .text-gradient {
-    @apply bg-gradient-to-r from-[#B57BFF] via-[#9B4DFF] to-[#E2A0FF] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#5FB4F2] via-[#2092E5] to-[#ED1F9E] bg-clip-text text-transparent;
   }
 }
 
 @layer utilities {
-  /* Soft violet halo behind sections */
+  /* Soft blue halo behind sections */
   .halo {
-    background: radial-gradient(closest-side, rgb(124 58 237 / 0.35), transparent);
+    background: radial-gradient(closest-side, rgb(32 146 229 / 0.28), transparent);
   }
 }

@@ -23,7 +23,7 @@ export function ExperienceCards() {
             <Reveal key={item.id} delay={(i % 2) * 0.08} className="card-glow group flex gap-5 p-6 transition-colors hover:border-accent/60 sm:p-7">
               <div className="relative shrink-0">
                 <span aria-hidden className="absolute inset-0 rounded-2xl bg-accent-deep/70 blur-xl transition-opacity group-hover:opacity-100 sm:opacity-70" />
-                <span className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7C3AED] to-[#C084FC] shadow-lg shadow-accent-deep/40 sm:h-20 sm:w-20">
+                <span className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1466B8] to-[#2092E5] shadow-lg shadow-accent-deep/40 sm:h-20 sm:w-20">
                   <Icon className="h-8 w-8 text-white sm:h-9 sm:w-9" aria-hidden />
                 </span>
               </div>

@@ -22,6 +22,7 @@ const config: Config = {
           soft: token("accent-soft"),
           deep: token("accent-deep"),
         },
+        pink: token("pink"),
         "on-accent": token("on-accent"),
         signal: token("signal"),
       },
