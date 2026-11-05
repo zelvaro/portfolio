@@ -12,7 +12,7 @@ const STATS = [
   { value: 8, label: "Months of GenAIOT training" },
 ];
 
-function CountUp({ to }: { to: number }) {
+export function CountUp({ to }: { to: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
   const reduce = useReducedMotion();

@@ -53,7 +53,7 @@ function ContactForm() {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setSubmitted(true);
-      confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 }, colors: ["#2092E5", "#7FC4F5", "#ED1F9E"] });
+      confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 }, colors: ["#2092E5", "#7FC4F5", "#FFFFFF"] });
     } catch {
       setError(`The message could not be sent. Email me directly at ${PERSONAL_INFO.email}.`);
     } finally {

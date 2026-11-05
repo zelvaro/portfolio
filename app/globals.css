@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Galactic blue base, true blue accents, a touch of magenta pink */
+/* Galactic blue base and true blue accents; magenta pink is reserved for buttons */
 :root {
   --bg: 4 24 59;            /* galactic blue #04183B */
   --surface: 10 37 82;
@@ -70,10 +70,10 @@ h3 {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200;
   }
   .btn-primary {
-    @apply btn bg-gradient-to-r from-[#1466B8] to-[#2092E5] text-white shadow-lg shadow-[#2092E5]/30 hover:brightness-110;
+    @apply btn bg-gradient-to-r from-[#2092E5] to-[#ED1F9E] text-white shadow-lg shadow-[#ED1F9E]/25 hover:brightness-110;
   }
   .btn-secondary {
-    @apply btn border border-line bg-surface/60 text-ink backdrop-blur hover:border-accent/70;
+    @apply btn border border-line bg-surface/60 text-ink backdrop-blur hover:border-[#ED1F9E]/70;
   }
   .link {
     @apply font-semibold text-accent underline-offset-4 hover:underline;
@@ -83,7 +83,7 @@ h3 {
     @apply relative overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-[#061E48] via-[#0A2858] to-[#0F3570];
   }
   .text-gradient {
-    @apply bg-gradient-to-r from-[#5FB4F2] via-[#2092E5] to-[#ED1F9E] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#7FC4F5] via-[#4FAEF0] to-[#2092E5] bg-clip-text text-transparent;
   }
 }
 

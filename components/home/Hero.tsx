@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { PERSONAL_INFO } from "@/lib/data";
-import { Stats } from "./Stats";
 
 const ROLES = ["a Full Stack Developer.", "an AI Engineering Intern.", "an Engineering Student."];
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -67,7 +66,7 @@ export function Hero({ avatarSrc }: { avatarSrc?: string | null }) {
           </div>
           <div>
             <p className="text-sm text-muted">
-              Hello! I&apos;m <span className="font-semibold text-[#ED1F9E]">{PERSONAL_INFO.name}</span>
+              Hello! I&apos;m <span className="font-semibold text-accent">{PERSONAL_INFO.name}</span>
             </p>
             <h1 className="mt-2 max-w-md text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
               Building web, mobile and <span className="text-gradient">AI products.</span>
@@ -100,11 +99,7 @@ export function Hero({ avatarSrc }: { avatarSrc?: string | null }) {
           </a>
         </motion.div>
 
-        <motion.div {...enter(5)} className="mt-14 w-full">
-          <Stats />
-        </motion.div>
-
-        <motion.p {...enter(6)} className="mt-10 inline-flex items-center gap-2 text-sm text-muted">
+        <motion.p {...enter(5)} className="mt-8 inline-flex items-center gap-2 text-sm text-muted">
           <span className="relative flex h-2 w-2" aria-hidden>
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-signal opacity-60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-signal" />
