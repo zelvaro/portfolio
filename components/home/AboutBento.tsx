@@ -166,7 +166,7 @@ export function AboutBento({ avatarSrc }: { avatarSrc?: string | null }) {
       <Reveal>
         <div className={`${tile} overflow-hidden px-0 py-5`}>
           <div className="relative [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-            <ul className="flex w-max animate-marquee gap-10" aria-hidden>
+            <ul className="tech-marquee flex w-max gap-10" aria-hidden>
               {[...MARQUEE, ...MARQUEE].map((path, i) => (
                 <li key={i}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -174,7 +174,7 @@ export function AboutBento({ avatarSrc }: { avatarSrc?: string | null }) {
                     src={`${ICON_BASE}/${path}`}
                     alt=""
                     loading="lazy"
-                    className="h-9 w-9 opacity-80 grayscale transition hover:opacity-100 hover:grayscale-0"
+                    className={`h-9 w-9 transition-transform hover:scale-110 ${path.startsWith("nextjs") ? "rounded-full bg-white" : ""}`}
                   />
                 </li>
               ))}

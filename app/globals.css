@@ -87,6 +87,24 @@ h3 {
   }
 }
 
+/* Endless one-line scroll of technology logos (the list is rendered twice) */
+@keyframes tech-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.tech-marquee {
+  animation: tech-marquee 35s linear infinite;
+}
+
+.tech-marquee:hover {
+  animation-play-state: paused;
+}
+
 @layer utilities {
   /* Soft blue halo behind sections */
   .halo {
